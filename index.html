@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio penerjemah manga Johan Winas TL — daftar judul, pembaruan terbaru, dan informasi kolaborasi."
+    />
+    <title>Johan Winas TL — Portfolio Penerjemah Manga</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-theme="dark" data-oc="ryou">
+    <div id="page-loader" class="loader">
+      <div class="loader-inner">
+        <img id="loader-img" src="image/wm2_putih.png" alt="loading" />
+        <p>Loading...</p>
+      </div>
+    </div>
+    <a class="skip-link" href="#main-content">Langsung ke konten</a>
+
+    <div class="brand-oc" aria-hidden="true">
+      <img
+        class="brand-oc__img brand-oc__img--left"
+        src="image/Himori_Rinka.png"
+        alt=""
+      />
+      <img
+        class="brand-oc__img brand-oc__img--right"
+        src="image/Ryou_Akatsune.png"
+        alt=""
+      />
+    </div>
+
+    <header class="site-header">
+      <nav class="navbar" aria-label="Utama">
+        <a class="navbar__brand" href="index.html" class="nav-link"
+          >Johan Winas TL</a
+        >
+        <div class="navbar__search-wrap">
+          <label class="visually-hidden" for="manga-search"
+            >Cari judul manga</label
+          >
+          <input
+            id="manga-search"
+            class="navbar__search"
+            type="search"
+            placeholder="Cari judul…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Ubah tema"
+        >
+          &#127769;
+        </button>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section
+        class="hero hero--cinematic"
+        aria-labelledby="hero-title"
+        aria-describedby="hero-subtitle"
+      >
+        <div class="hero__inner">
+          <div class="hero__text">
+            <p
+              id="hero-subtitle"
+              class="hero__subtitle"
+              data-field="heroSubtitle"
+            >
+              Manga Translator • Bringing Stories to Life
+            </p>
+            <p class="hero__headline">
+              <span class="hero__headline-text" id="hero-typed"
+                >Terjemahan yang terasa asli—ritmenya tetap hidup.</span
+              >
+              <span class="hero__caret" aria-hidden="true"></span>
+            </p>
+            <h1 id="hero-title" class="hero__title">Johan Winas TL</h1>
+            <p class="hero__desc" data-field="heroDescription"></p>
+            <div class="hero__cta">
+              <!-- <a
+                class="btn btn--primary"
+                class="nav-link"
+                href="reader.html"
+                id="cta-read"
+                >Baca Manga</a
+              > -->
+
+              <a class="btn btn--ghost" class="nav-link" href="#catalog"
+                >Lihat Katalog</a
+              >
+              <a class="btn btn--ghost" class="nav-link" href="#work-with-me"
+                >Komisi / Kolaborasi</a
+              >
+            </div>
+          </div>
+          <div class="hero__visual">
+            <div class="hero__scene" aria-hidden="true">
+              <img
+                class="hero__oc hero__oc--left"
+                src="image/Himori_Rinka.png"
+                alt=""
+              />
+              <img
+                class="hero__oc hero__oc--right"
+                src="image/Ryou_Akatsune.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--latest" aria-labelledby="latest-heading">
+        <div class="section__head">
+          <h2 id="latest-heading" class="section__title">Pembaruan terbaru</h2>
+          <p class="section__hint">Geser horizontal</p>
+        </div>
+        <div
+          class="latest-scroll"
+          role="region"
+          aria-label="Judul terbaru diperbarui"
+        >
+          <div class="latest-scroll__track" id="latest-track"></div>
+        </div>
+      </section>
+
+      <section class="section section--short" aria-labelledby="short-heading">
+        <div class="section__head">
+          <h2 id="short-heading" class="section__title">Short Translations</h2>
+          <p class="section__meta">
+            Terjemahan singkat (1–4 halaman) dari berbagai seri.
+          </p>
+        </div>
+
+        <div class="short-card">
+          <div class="short-card__body">
+            <div class="short-card__dialog">
+              <p class="short-card__text"></p>
+              <p class="short-card__author"></p>
+            </div>
+
+            <div class="short-card__cta">
+              <a
+                class="btn btn--ghost"
+                href="https://www.facebook.com/profile.php?id=61585006332289&sk=photos_albums"
+                target="_blank"
+              >
+                🗂️ Lihat Archive
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="catalog"
+        class="section section--grid"
+        aria-labelledby="catalog-heading"
+      >
+        <div class="section__head">
+          <h2 id="catalog-heading" class="section__title">Manga</h2>
+          <p class="section__meta" id="catalog-count" aria-live="polite"></p>
+        </div>
+        <div
+          class="filter-bar"
+          style="display: flex; gap: 10px; margin-bottom: 12px"
+        >
+          <div class="filter-bar">
+            <div class="filter-group" id="filter-series"></div>
+            <div class="filter-group" id="filter-genre"></div>
+          </div>
+        </div>
+        <div class="manga-grid" id="manga-grid"></div>
+        <p class="empty-state" id="empty-state" hidden></p>
+      </section>
+
+      <section
+        class="section section--branding"
+        aria-labelledby="branding-heading"
+      >
+        <div class="section__head">
+          <h2 id="branding-heading" class="section__title">OC Branding</h2>
+          <p class="section__meta">Dua karakter yang jadi identitas visual.</p>
+        </div>
+        <div class="branding-grid" id="branding-grid"></div>
+      </section>
+
+      <section
+        id="work-with-me"
+        class="section section--work"
+        aria-labelledby="work-heading"
+      >
+        <div class="section__head">
+          <h2 id="work-heading" class="section__title">Work With Me</h2>
+          <p class="section__meta">Komisi, kolaborasi, atau proofreading.</p>
+        </div>
+        <div class="work-card">
+          <div class="work-card__body">
+            <div class="work-card__grid">
+              <!-- LEFT -->
+              <div class="work-card__left">
+                <p class="work-card__text">
+                  Saya terbuka untuk kolaborasi penerjemahan manga, typeset, dan
+                  QA istilah. Jelaskan judul, deadline, dan contoh halaman—saya
+                  balas dengan estimasi.
+                </p>
+
+                <div class="work-archive">
+                  🗂️ Konten lama & short TL:
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61585006332289"
+                    target="_blank"
+                  >
+                    lihat archive
+                  </a>
+                </div>
+              </div>
+
+              <!-- RIGHT -->
+              <div class="work-card__cta">
+                <a
+                  class="btn btn--primary"
+                  href="https://m.me/johan.winas.2025"
+                >
+                  Chat via Messenger
+                </a>
+
+                <a
+                  class="btn btn--ghost"
+                  href="https://www.facebook.com/johan.winas.2025/"
+                >
+                  Facebook (Utama)
+                </a>
+
+                <a
+                  class="btn btn--primary"
+                  href="https://saweria.co/JohanWinas"
+                  target="_blank"
+                >
+                  ☕ Beliin Translator Kopi
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p class="site-footer__copy">
+        © <span id="year"></span> Johan Winas TL — Portfolio penerjemah.
+      </p>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/character.js"></script>
+    <script>
+      const theme = document.body.dataset.theme;
+      const img = document.getElementById("loader-img");
+
+      if (theme === "light") {
+        img.src = "image/wm2.png";
+      } else {
+        img.src = "image/wm2_putih.png";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Detail judul — Johan Winas TL" />
+    <title>Detail — Johan Winas TL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-theme="dark" data-oc="ryou">
+    <a class="skip-link" class="nav-link" href="#detail-main"
+      >Langsung ke konten</a
+    >
+
+    <div class="brand-oc" aria-hidden="true">
+      <img
+        class="brand-oc__img brand-oc__img--left"
+        src="image/Himori_Rinka.png"
+        alt=""
+      />
+      <img
+        class="brand-oc__img brand-oc__img--right"
+        src="image/Ryou_Akatsune.png"
+        alt=""
+      />
+    </div>
+
+    <header class="site-header">
+      <nav class="navbar" aria-label="Utama">
+        <a class="navbar__brand" class="nav-link" href="index.html"
+          >Johan Winas TL</a
+        >
+        <div class="navbar__search-wrap">
+          <label class="visually-hidden" for="manga-search"
+            >Cari judul manga</label
+          >
+          <input
+            id="manga-search"
+            class="navbar__search"
+            type="search"
+            placeholder="Cari judul…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <button
+          class="theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="Ubah tema"
+        >
+          &#127769;
+        </button>
+      </nav>
+    </header>
+
+    <main id="detail-main" class="detail-page">
+      <div class="page-shell">
+        <a class="detail-back" class="nav-link" href="index.html"
+          >← Kembali ke katalog</a
+        >
+        <div id="detail-root"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p class="site-footer__copy">
+        © <span id="year"></span> Johan Winas TL — Portfolio penerjemah.
+      </p>
+    </footer>
+
+    <script src="js/theme.js"></script>
+    <script src="js/detail.js"></script>
+  </body>
+</html>
