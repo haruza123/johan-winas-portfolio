@@ -12,6 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/analytics.js"></script>
   </head>
   <body class="reader-page mode-scroll" data-theme="dark" data-oc="ryou">
     <a class="skip-link" class="nav-link" href="#reader-main"
@@ -63,6 +64,7 @@
     <main id="reader-main">
       <div class="reader-shell">
         <div class="reader-head">
+
           <a
             class="detail-back"
             class="nav-link"
@@ -71,10 +73,25 @@
             >← Kembali</a
           >
           <h1 class="reader-title" id="reader-title">Reader</h1>
+          
+          <p class="reader-hint" id="reader-hint"></p>
+        </div>
           <div class="reader-controls" aria-label="Kontrol reader">
+
+            <div class="reader-progress-bar">
+            <div id="reader-progress-fill"></div>
+          </div>
             <div class="reader-controls__group">
-              
-              <button class="btn btn--primary" type="button" id="next-chapter">
+              <a class="btn btn--ghost" id="action-back" href="#">
+                ← Kembali
+              </a>
+              <button class="btn btn--ghost" id="mode-toggle">
+                Mode: Scroll
+              </button>
+              <button class="btn btn--ghost" type="button" id="reader-settings-open">
+                Settings
+              </button>
+              <button class="btn btn--primary" type="button" id="next-chapter" style="display: none;">
                 Next Chapter →
               </button>
               <p class="reader-progress" id="reader-progress">Page 1 / 20</p>
@@ -89,14 +106,28 @@
               ></select>
             </div>
           </div>
-          <p class="reader-hint" id="reader-hint"></p>
-        </div>
-
         <div
           class="reader-pages"
           id="reader-pages"
           aria-label="Halaman manga"
         ></div>
+
+        <div id="reader-end" aria-hidden="true"></div>
+
+        <section
+          class="reader-reco"
+          id="reader-reco"
+          aria-labelledby="reader-reco-title"
+          hidden
+        >
+          <div class="reader-reco__head">
+            <h2 class="reader-reco__title" id="reader-reco-title">
+              Rekomendasi lainnya
+            </h2>
+            <p class="reader-reco__meta" id="reader-reco-meta"></p>
+          </div>
+          <div class="reader-reco__grid" id="reader-reco-grid"></div>
+        </section>
       </div>
     </main>
 
@@ -107,6 +138,7 @@
     </footer>
 
     <script src="js/theme.js"></script>
+    <script src="js/security.js"></script>
     <script src="js/reader.js"></script>
   </body>
 </html>

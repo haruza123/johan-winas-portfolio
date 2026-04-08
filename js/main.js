@@ -137,6 +137,26 @@ document
   .getElementById("filter-genre")
   .addEventListener("change", updateFilter);
 
+// function updateFilter() {
+//   const filtered = mangaList.filter((m) => {
+//     const matchSeries = !selectedSeries || m.series === selectedSeries;
+//     const matchGenre =
+//       !selectedGenre || (m.genres || []).includes(selectedGenre);
+//     return matchSeries && matchGenre;
+//   });
+
+//   const grid = document.getElementById("manga-grid");
+
+//   renderGrid(grid, filtered);
+
+//   const countEl = document.getElementById("catalog-count");
+//   updateCatalogCount(countEl, filtered.length, mangaList.length);
+
+//   // 🔥 TAMBAH INI
+//   showEmptyState(filtered, `${selectedSeries || ""} ${selectedGenre || ""}`);
+// }
+
+
 function updateFilter() {
   const filtered = mangaList.filter((m) => {
     const matchSeries = !selectedSeries || m.series === selectedSeries;
@@ -145,12 +165,25 @@ function updateFilter() {
     return matchSeries && matchGenre;
   });
 
+  currentFiltered = filtered;
+
+  applySortAndRender();
+}
+
+function applySortAndRender() {
+  const sortType = document.getElementById("sort-select")?.value || "latest";
+
+  currentSorted = sortManga(currentFiltered, sortType);
+
+  currentPage = 1;
+
   const grid = document.getElementById("manga-grid");
+  renderPaginated(grid, currentSorted);
 
-  renderGrid(grid, filtered);
+  const countEl = document.getElementById("catalog-count");
+  updateCatalogCount(countEl, currentSorted.length, mangaList.length);
 
-  // 🔥 TAMBAH INI
-  showEmptyState(filtered, `${selectedSeries || ""} ${selectedGenre || ""}`);
+  showEmptyState(currentSorted);
 }
 
 function initHeroTyping() {
@@ -187,7 +220,9 @@ function buildLatestCard(item) {
 
   return `
     <article class="latest-card">
-      <a class="latest-card__link" href="${href}">
+      <a class="latest-card__link" href="${href}" data-manga-id="${escapeHtml(
+        item.id,
+      )}" data-manga-title="${escapeHtml(item.title)}" data-track-source="latest">
         <div class="latest-card__cover-wrap">
           <img class="latest-card__cover" src="${escapeHtml(item.cover)}" alt="" loading="lazy" width="120" height="160" />
         </div>
@@ -204,12 +239,30 @@ function buildGridCard(item) {
   const title = escapeHtml(item.title);
   const href = detailHref(item.id);
 
+  const status = item.status || "";
+  const statusClass =
+    status.toLowerCase() === "ongoing" ? "status--ongoing" : "status--done";
+
   return `
     <article class="manga-card">
-      <a class="manga-card__link" href="${href}" aria-label="${title}">
-        <img class="manga-card__cover" src="${escapeHtml(item.cover)}" alt="" loading="lazy" />
-        <span class="manga-card__overlay" aria-hidden="true"></span>
-        <h3 class="manga-card__title">${title}</h3>
+      <a class="manga-card__link" href="${href}" aria-label="${title}" data-manga-id="${escapeHtml(
+        item.id,
+      )}" data-manga-title="${escapeHtml(item.title)}" data-track-source="catalog">
+        
+        <div class="manga-card__cover-wrap">
+
+          <!-- 🔥 STATUS BADGE -->
+          <span class="status-badge ${statusClass}">
+            ${escapeHtml(status)}
+          </span>
+
+          <img class="manga-card__cover" src="${escapeHtml(item.cover)}" alt="" loading="lazy" />
+        </div>
+
+        <div class="manga-card__body">
+          <h3 class="manga-card__title">${title}</h3>
+        </div>
+
       </a>
     </article>
   `;
@@ -253,6 +306,14 @@ function onSearchInput(gridEl, countEl, emptyEl, query) {
 
   renderGrid(gridEl, filtered);
   updateCatalogCount(countEl, filtered.length, mangaList.length);
+
+  // Scroll to catalog section if user types something
+  if (query.trim() !== '') {
+    const catalog = document.getElementById('catalog');
+    if (catalog) {
+      catalog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 
   // 🔥 INI YANG KAMU LUPA
   showEmptyState(filtered, query);
@@ -328,6 +389,23 @@ function init() {
   const countEl = document.getElementById("catalog-count");
   const emptyEl = document.getElementById("empty-state");
   const yearEl = document.getElementById("year");
+  const loadMoreBtn = document.getElementById("load-more-btn");
+  const sortSelect = document.getElementById("sort-select");
+
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener("click", () => {
+    currentPage++;
+    renderPaginated(gridEl, currentSorted);
+  });
+}
+
+
+
+if (sortSelect) {
+  sortSelect.addEventListener("change", () => {
+    applySortAndRender();
+  });
+}
 
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
   initHeroTyping();
@@ -343,9 +421,12 @@ function init() {
       applyBrandingOcs(data);
       renderBrandingGrid(data);
       applyShortSectionPersonality();
+      applyDonationPersonality();
 
       renderLatest(trackEl, latestSorted);
-      renderGrid(gridEl, mangaList);
+      // renderGrid(gridEl, mangaList);
+      currentFiltered = mangaList;
+applySortAndRender();
       updateCatalogCount(countEl, mangaList.length, mangaList.length);
 
       setStartReadingCta();
@@ -375,20 +456,36 @@ if (document.readyState === "loading") {
 
 window.addEventListener("load", () => {
   const loader = document.getElementById("page-loader");
-  loader.style.opacity = "0";
+  if (loader) {
+    loader.style.opacity = "0";
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 400);
+  }
+});
 
-  setTimeout(() => {
-    loader.style.display = "none";
-  }, 400);
+// Fix BFCache issue (blank screen when pressing back button)
+window.addEventListener("pageshow", (e) => {
+  if (e.persisted) {
+    // Hide loader if it got stuck
+    const loader = document.getElementById("page-loader");
+    if (loader) {
+      loader.style.opacity = "0";
+      loader.style.display = "none";
+    }
+    // Remove blur/opacity 0 from security.js when navigating back
+    document.body.style.filter = "none";
+    document.body.style.opacity = "1";
+  }
 });
 
 const theme = document.body.dataset.theme;
 const img = document.getElementById("loader-img");
 
 if (theme === "light") {
-  img.src = "image/Wm2_putih.png";
+  if (img) img.src = "image/Wm2_putih.png";
 } else {
-  img.src = "image/Wm2.png";
+  if (img) img.src = "image/Wm2.png";
 }
 
 function showEmptyState(list, query) {
@@ -474,6 +571,102 @@ function applyShortSectionPersonality() {
   const pool = SHORT_DIALOG[type];
   const text = pool[Math.floor(Math.random() * pool.length)];
 
+  // fade out dulu
+textEl.style.opacity = 0;
+authorEl.style.opacity = 0;
+
+setTimeout(() => {
   textEl.textContent = text;
-  authorEl.textContent = "— " + name;
+  authorEl.textContent = name;
+
+  // fade in lagi
+  textEl.style.opacity = 1;
+  authorEl.style.opacity = 1;
+}, 150);
+  
+  const cardEl = document.querySelector(".short-card");
+  if (cardEl) {
+    cardEl.setAttribute("data-character", type);
+  }
+}
+
+
+function applyDonationPersonality() {
+  const textEl = document.querySelector(".donation-text");
+  const authorEl = document.querySelector(".donation-author");
+
+  if (!textEl || !authorEl) return;
+
+  const theme = document.body.dataset.theme;
+
+  let type, name;
+
+  if (theme === "light") {
+    type = "himori";
+    name = "Himori 🧡";
+  } else {
+    type = "ryou";
+    name = "Ryou 🖤";
+  }
+
+  const pool = DONATION_DIALOG[type];
+  const text = pool[Math.floor(Math.random() * pool.length)];
+
+  // fade animation
+  textEl.style.opacity = 0;
+  authorEl.style.opacity = 0;
+
+  setTimeout(() => {
+    textEl.textContent = text;
+    authorEl.textContent = name;
+
+    textEl.style.opacity = 1;
+    authorEl.style.opacity = 1;
+  }, 150);
+}
+
+
+
+let currentPage = 1;
+const ITEMS_PER_PAGE = 12;
+
+let currentFiltered = [];
+let currentSorted = [];
+function sortManga(list, type) {
+  const sorted = [...list];
+
+  switch (type) {
+    case "az":
+      return sorted.sort((a, b) => a.title.localeCompare(b.title));
+
+    case "za":
+      return sorted.sort((a, b) => b.title.localeCompare(a.title));
+
+    case "oldest":
+      return sorted.sort(
+        (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)
+      );
+
+    case "latest":
+    default:
+      return sorted.sort(
+        (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+      );
+  }
+}
+function renderPaginated(gridEl, list) {
+  const end = currentPage * ITEMS_PER_PAGE;
+  const sliced = list.slice(0, end);
+
+  renderGrid(gridEl, sliced);
+
+  const loadMoreBtn = document.getElementById("load-more-btn");
+
+  if (loadMoreBtn) {
+    if (end >= list.length) {
+      loadMoreBtn.style.display = "none";
+    } else {
+      loadMoreBtn.style.display = "inline-flex";
+    }
+  }
 }

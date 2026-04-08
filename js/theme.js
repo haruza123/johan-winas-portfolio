@@ -73,6 +73,13 @@
       if (typeof applyHeroPersonality === "function") {
         applyHeroPersonality();
       }
+
+      if (typeof applyShortSectionPersonality === "function") {
+        applyShortSectionPersonality();
+      }
+      if (typeof applyDonationPersonality === "function") {
+        applyDonationPersonality();
+      }
     });
   }
 
@@ -110,3 +117,5 @@ window.addEventListener("DOMContentLoaded", () => {
     img.src = "image/wm2_putih.png";
   }
 });
+
+

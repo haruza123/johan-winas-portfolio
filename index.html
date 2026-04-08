@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <script src="js/analytics.js"></script>
   </head>
   <body data-theme="dark" data-oc="ryou">
     <div id="page-loader" class="loader">
@@ -179,13 +180,35 @@
           class="filter-bar"
           style="display: flex; gap: 10px; margin-bottom: 12px"
         >
+          <!-- <div class="filter-bar">
+            <div class="filter-group" id="filter-series"></div>
+            <div class="filter-group" id="filter-genre"></div>
+          </div> -->
           <div class="filter-bar">
             <div class="filter-group" id="filter-series"></div>
             <div class="filter-group" id="filter-genre"></div>
+
+            <div class="filter-group">
+              <select id="sort-select" class="sort-select">
+                <option value="latest">Terbaru Update</option>
+                <option value="az">A-Z</option>
+                <option value="za">Z-A</option>
+                <option value="oldest">Terlama Update</option>
+              </select>
+            </div>
           </div>
+
         </div>
         <div class="manga-grid" id="manga-grid"></div>
         <p class="empty-state" id="empty-state" hidden></p>
+        <!-- ✅ PINDAH KE SINI -->
+        <div class="load-more-wrap">
+          <button id="load-more-btn" class="btn btn--ghost">
+            Muat Lebih Banyak
+          </button>
+        </div>
+
+        
       </section>
 
       <section
@@ -208,53 +231,46 @@
           <h2 id="work-heading" class="section__title">Work With Me</h2>
           <p class="section__meta">Komisi, kolaborasi, atau proofreading.</p>
         </div>
-        <div class="work-card">
-          <div class="work-card__body">
-            <div class="work-card__grid">
-              <!-- LEFT -->
-              <div class="work-card__left">
-                <p class="work-card__text">
-                  Saya terbuka untuk kolaborasi penerjemahan manga, typeset, dan
-                  QA istilah. Jelaskan judul, deadline, dan contoh halaman—saya
-                  balas dengan estimasi.
-                </p>
+        <div class="work-card__grid">
+          <!-- LEFT -->
+          <div class="work-card__left">
+            <p class="work-card__text">
+              Saya terbuka untuk kolaborasi penerjemahan manga, typeset, dan
+              QA istilah. Jelaskan judul, deadline, dan contoh halaman—saya
+              balas dengan estimasi.
+            </p>
 
-                <div class="work-archive">
-                  🗂️ Konten lama & short TL:
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61585006332289"
-                    target="_blank"
-                  >
-                    lihat archive
-                  </a>
-                </div>
+            <!-- 🔥 PINDAH KE SINI -->
+            <div class="donation-scene">
+              <div class="donation-dialog">
+                <p class="donation-text"></p>
+                <p class="donation-author"></p>
               </div>
 
-              <!-- RIGHT -->
-              <div class="work-card__cta">
-                <a
-                  class="btn btn--primary"
-                  href="https://m.me/johan.winas.2025"
-                >
-                  Chat via Messenger
+              <div class="donation-buttons">
+                <a class="btn btn--primary" href="https://saweria.co/JohanWinas" target="_blank">
+                  ☕ Saweria
                 </a>
-
-                <a
-                  class="btn btn--ghost"
-                  href="https://www.facebook.com/johan.winas.2025/"
-                >
-                  Facebook (Utama)
-                </a>
-
-                <a
-                  class="btn btn--primary"
-                  href="https://saweria.co/JohanWinas"
-                  target="_blank"
-                >
-                  ☕ Beliin Translator Kopi
+                <a class="btn btn--ghost" href="https://trakteer.id/oybmjkbtowieibzefkey" target="_blank">
+                  🎁 Trakteer
                 </a>
               </div>
             </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="work-card__cta">
+            <a class="btn btn--primary" href="https://m.me/johan.winas.2025">
+              Chat via Messenger
+            </a>
+
+            <a class="btn btn--ghost" href="https://www.facebook.com/johan.winas.2025/">
+              Facebook (Utama)
+            </a>
+
+            <a class="btn btn--primary" href="https://www.facebook.com/profile.php?id=61585006332289">
+              Facebook (Archive)
+            </a>
           </div>
         </div>
       </section>
@@ -267,6 +283,8 @@
     </footer>
 
     <script src="js/theme.js"></script>
+    <script src="js/security.js"></script>
+    <script src="js/ads.js"></script>
     <script src="js/main.js"></script>
     <script src="js/character.js"></script>
     <script>

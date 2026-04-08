@@ -6,13 +6,17 @@
   },
   "branding": {
     "ocs": [
-    {
+      {
         "id": "himori-rinka",
         "name": "Himori Rinka",
         "position": "left",
         "image": "image/Himori_Rinka.png",
         "tagline": "Mengubah imajinasi menjadi realitas visual.",
-        "personality": ["Intuitive", "Expressive", "Aesthetic-driven"],
+        "personality": [
+          "Intuitive",
+          "Expressive",
+          "Aesthetic-driven"
+        ],
         "role": "Lead Visual Designer",
         "themeColor": "#ff7a89",
         "lore": "Seorang spesialis \"Light-Element\" yang bertugas menyusun piksel dan warna agar dunia digital terlihat hidup. Dia tidak suka sesuatu yang membosankan dan selalu mencari cara untuk membuat segalanya terlihat lebih \"berkilau\"."
@@ -23,7 +27,11 @@
         "position": "right",
         "image": "image/Ryou_Akatsune.png",
         "tagline": "Membangun fondasi yang tak tergoyahkan.",
-        "personality": ["Methodical", "Calm", "System-oriented"],
+        "personality": [
+          "Methodical",
+          "Calm",
+          "System-oriented"
+        ],
         "role": "System Architect",
         "themeColor": "#2f73ff",
         "lore": "Penjaga struktur digital yang memastikan setiap logika dan fungsi berjalan dengan presisi tinggi di balik layar."
@@ -35,39 +43,46 @@
       "id": "uruslah",
       "title": "Uruslah Aku Seumur Hidupmu",
       "series": "Uma Musume",
-      "genres": ["Comedy"],
-      "cover": "image/Uruslah_aku_seumur_hidupmu/0.jpg",
-        "artist": {
-    "name": "bookwormU",
-    "url": " https://www.pixiv.net/en/artworks/138254357"
-  },
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/Uruslah_aku_seumur_hidupmu/1.webp",
+      "artist": {
+        "name": "bookwormU",
+        "url": " https://www.pixiv.net/en/artworks/138254357"
+      },
       "description": "Ketika agnes tacyhon harus menghadapi bahwa trainernya pergi dinas, tacyhon harus mencoba membuat masakan sendiri walaupun dirinya belum pernah memasak",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Comedy"],
+      "tags": [
+        "Comedy"
+      ],
       "chapters": [
         {
           "number": 1,
-          "pages": 9,
+          "pages": 10,
           "folder": "image/Uruslah_aku_seumur_hidupmu/"
         }
       ]
     },
-
     {
       "id": "twin-turbo",
       "title": "Ganbare Twin Turbo",
       "series": "Uma Musume",
-      "genres": ["Comedy"],
-      "cover": "image/Ganbare_Twin_Turbo/1.png",
-              "artist": {
-    "name": "Ryuu Miyao",
-    "url": "https://mangadex.org/author/19c1edb7-0e42-4f79-bfca-7a0c6bf6c94c/ryuu-miyao"
-  },
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/Ganbare_Twin_Turbo/1.webp",
+      "artist": {
+        "name": "Ryuu Miyao",
+        "url": "https://mangadex.org/author/19c1edb7-0e42-4f79-bfca-7a0c6bf6c94c/ryuu-miyao"
+      },
       "description": "Setelah dipaksa meminum ramuan aneh, sang Trainer menyusut dan terjebak dalam situasi yang mengancam nyawa! Beruntung, seorang Uma Musume berambut biru kepang menyelamatkannya, meski ia salah mengira sang Trainer sebagai Fans Nomor 1-nya",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Comedy" ],
+      "tags": [
+        "Comedy"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -76,21 +91,24 @@
         }
       ]
     },
-
     {
       "id": "Miyako",
       "title": "Miyako yang menyatakan perasaannya",
       "series": "Blue archive",
-      "genres": ["Drama"],
+      "genres": [
+        "Drama"
+      ],
       "cover": "image/Miyako/1.png",
-  "artist": {
-    "name": "회장",
-    "url": "https://arca.live/b/bluearchive/109751652"
-  },
+      "artist": {
+        "name": "회장",
+        "url": "https://arca.live/b/bluearchive/109751652"
+      },
       "description": "Kisah Miyako yang menyatakan perasaannya kepada Trainer",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Drama" ],
+      "tags": [
+        "Drama"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -99,21 +117,24 @@
         }
       ]
     },
-
     {
       "id": "Haru&Opera",
       "title": "Perasaan yang Aneh",
       "series": "Uma Musume",
-      "genres": ["Drama"],
-      "cover": "image/Perasaan_yang_Aneh/0.png",
+      "genres": [
+        "Drama"
+      ],
+      "cover": "image/Perasaan_yang_Aneh/1.webp",
       "artist": {
-    "name": "orenamonaki",
-    "url": "https://www.pixiv.net/en/artworks/116737050"
-  },
+        "name": "orenamonaki",
+        "url": "https://www.pixiv.net/en/artworks/116737050"
+      },
       "description": "Urara menyadari ada yang berbeda dari ambisi Opera O. Sebuah percakapan di tepi lintasan membuka sisi rapuh sang bintang yang selama ini tersembunyi.",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume" ],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -122,21 +143,24 @@
         }
       ]
     },
-
     {
       "id": "Trainer_kumpul_kebo",
       "title": "Kehebohan pagi di tahun baru",
       "series": "Uma Musume",
-      "genres": ["Comedy"],
+      "genres": [
+        "Comedy"
+      ],
       "cover": "image/Kehebohan_pagi_di_tahun_baru/1.png",
-              "artist": {
-    "name": "hideim",
-    "url": "https://x.com/hideim/status/1875316460194820488"
-  },
+      "artist": {
+        "name": "hideim",
+        "url": "https://x.com/hideim/status/1875316460194820488"
+      },
       "description": "Pesta tahun baru berakhir kacau. Trainer terbangun dengan kemeja penuh bekas lipstik dan apartemen dipenuhi para gadis. Sialnya, Gentildonna datang berkunjung dan ia lebih memilih mendobrak pintu daripada mendengar penjelasan.",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume" ],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -145,21 +169,24 @@
         }
       ]
     },
-
     {
       "id": "Keabadian_dalam_Kegelapan",
       "title": "Keabadian dalam Kegelapan",
       "series": "Uma Musume",
-      "genres": ["Thriller"],
+      "genres": [
+        "Thriller"
+      ],
       "cover": "image/Keabadian_dalam_Kegelapan/1.png",
       "artist": {
-    "name": "yamo_manju",
-    "url": "https://x.com/yamo_manju/status/2019727083786899651"
-  },
+        "name": "yamo_manju",
+        "url": "https://x.com/yamo_manju/status/2019727083786899651"
+      },
       "description": "Terobsesi untuk memiliki Trainer selamanya, Still in Love memilih jalan tergelap. Saat tubuh sang Trainer kian rapuh, ia memutuskan untuk “menghapus” batas antara hidup dan kebersamaan… selamanya.",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume"],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -168,21 +195,24 @@
         }
       ]
     },
-
     {
       "id": "Gomen_Grass",
       "title": "Kisah Grass Wonder yang Menyukai Spe-chan dan Trainer",
       "series": "Uma Musume",
-      "genres": ["Drama"],
-      "cover": "image/Gomen_Grass/1.png",
-              "artist": {
-    "name": "mo_21plus",
-    "url": "https://www.melonbooks.co.jp/detail/detail.php?product_id=3118896"
-  },
+      "genres": [
+        "Drama"
+      ],
+      "cover": "image/Gomen_Grass/1.webp",
+      "artist": {
+        "name": "mo_21plus",
+        "url": "https://www.melonbooks.co.jp/detail/detail.php?product_id=3118896"
+      },
       "description": "Terobsesi untuk memiliki Trainer selamanya, Still in Love memilih jalan tergelap. Saat tubuh sang Trainer kian rapuh, ia memutuskan untuk “menghapus” batas antara hidup dan kebersamaan… selamanya.",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume"],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -191,21 +221,24 @@
         }
       ]
     },
-
     {
       "id": "Gomen_spe",
       "title": "Special week dan trainer yang sudah nikah",
       "series": "Uma Musume",
-      "genres": ["Drama"],
+      "genres": [
+        "Drama"
+      ],
       "cover": "image/Gomen_spe/ch1/1.png",
-              "artist": {
-    "name": "@aizuki_illust",
-    "url": "https://www.pixiv.net/en/artworks/125328588"
-  },
+      "artist": {
+        "name": "@aizuki_illust",
+        "url": "https://www.pixiv.net/en/artworks/125328588"
+      },
       "description": "Special Week Dramaar betul bahwa sang Trainer telah membangun hidup bersama orang lain. Namun, di balik logika yang menolak, benih-benih perasaan justru tumbuh tanpa permisi. Di tengah pergulatan batinnya yang kian menyesakkan, sebuah rahasia besar terungkap, memaksanya mempertanyakan kembali arti ketulusan yang selama ini ia genggam.",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume"],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -213,27 +246,30 @@
           "folder": "image/Gomen_spe/ch1/"
         },
         {
-          "number":2,
+          "number": 2,
           "pages": 44,
           "folder": "image/Gomen_spe/ch2/"
         }
       ]
     },
-
     {
       "id": "Makoto_dance",
       "title": "Dansa bersama Makoto",
       "series": "Blue archive",
-      "genres": ["Comedy"],
+      "genres": [
+        "Comedy"
+      ],
       "cover": "image/Makoto_dance/1.png",
-              "artist": {
-    "name": "氷MEGANE",
-    "url": "https://x.com/ice__megane/status/1765394751443132619"
-  },
+      "artist": {
+        "name": "氷MEGANE",
+        "url": "https://x.com/ice__megane/status/1765394751443132619"
+      },
       "description": "Makoto mengira dirinya terkena penyakit mematikan saat berdansa dengan Sensei. Padahal, itu cuma efek jatuh cinta! Ikuti kepanikan Makoto yang bikin Hina kena mental",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Blue Archive"],
+      "tags": [
+        "Blue Archive"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -242,21 +278,24 @@
         }
       ]
     },
-
     {
       "id": "Belno_kitahara",
       "title": "Kisah belno yang mencintai kitaraha",
       "series": "Uma Musume",
-      "genres": ["Romance"],
+      "genres": [
+        "Romance"
+      ],
       "cover": "image/Belno_kitahara/Ch1/1.png",
-              "artist": {
-    "name": "k_hiro0828",
-    "url": "https://www.pixiv.net/en/users/202057/manga"
-  },
+      "artist": {
+        "name": "k_hiro0828",
+        "url": "https://www.pixiv.net/en/users/202057/manga"
+      },
       "description": "Kisah belno yang mencintai kitaraha",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume"],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -270,21 +309,24 @@
         }
       ]
     },
-
     {
       "id": "Sensei_ketembak",
       "title": "ketika sensei tidak sengaja kena tembak",
       "series": "Blue archive",
-      "genres": ["Comedy"],
+      "genres": [
+        "Comedy"
+      ],
       "cover": "image/Sensei_ditembak/1.png",
       "artist": {
-    "name": "Monoa",
-    "url": "https://www.pixiv.net/en/artworks/116099766"
-  },
+        "name": "Monoa",
+        "url": "https://www.pixiv.net/en/artworks/116099766"
+      },
       "description": "Padahal cuma kena baju doang, tapi langsung diparani satu sekolah ",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Blue Archive"],
+      "tags": [
+        "Blue Archive"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -293,21 +335,24 @@
         }
       ]
     },
-
     {
       "id": "Taiki_cium",
       "title": "Taiki dan ciuman trainer saat tidur",
       "series": "Uma Musume",
-      "genres": ["Comedy"],
+      "genres": [
+        "Comedy"
+      ],
       "cover": "image/Taiki_ngecium/Ch1/1.png",
       "artist": {
-    "name": "moriji_funtouki",
-    "url": "https://www.pixiv.net/en/artworks/116099766"
-  },
+        "name": "moriji_funtouki",
+        "url": "https://www.pixiv.net/en/artworks/116099766"
+      },
       "description": "Taiki yang sedang mengunjungi trainer, tapi trainer tertidur sehingga taiki melakukan kejailan yang berakibat fatal",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume"],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -321,21 +366,24 @@
         }
       ]
     },
-
     {
       "id": "Kaitenger",
       "title": "Kaitenger itu kuat",
       "series": "Blue archive",
-      "genres": ["Drama"],
+      "genres": [
+        "Drama"
+      ],
       "cover": "image/Kaitenger/1.png",
       "artist": {
-    "name": "MrLazyEdition",
-    "url": " https://www.pixiv.net/en/artworks/135553930"
-  },
+        "name": "MrLazyEdition",
+        "url": " https://www.pixiv.net/en/artworks/135553930"
+      },
       "description": "Di saat ingatan Shiroko Terror mengenai kaitenger kembali",
       "status": "Tamat",
       "updatedAt": "2026-04-01",
-      "tags": ["Blue Archive"],
+      "tags": [
+        "Blue Archive"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -344,21 +392,24 @@
         }
       ]
     },
-
     {
       "id": "Suzuka_dah_nikah",
       "title": "Trainer dan Suzuka yang Menikah",
       "series": "Uma Musume",
-      "genres": ["Slice Of life"],
+      "genres": [
+        "Slice of life"
+      ],
       "cover": "image/negahamiTrainerdanSuzukayangpensiun_1528043978336673/Ch1/1.png",
       "artist": {
-    "name": "negahami",
-    "url": "https://x.com/negahami"
-  },
+        "name": "negahami",
+        "url": "https://x.com/negahami"
+      },
       "description": "Kehidupan Suzuka yang sudah menikah dengan Trainer setelah pensiun",
-      "status": "Tamat",
+      "status": "Ongoing",
       "updatedAt": "2026-04-01",
-      "tags": ["Uma Musume"],
+      "tags": [
+        "Uma Musume"
+      ],
       "chapters": [
         {
           "number": 1,
@@ -368,32 +419,310 @@
       ]
     },
     {
-  "id": "goldship_pulkam",
-  "title": "Goldship Pulkam",
-  "series": "Uma Musume",
-  "genres": [
-    "Slice of life"
-  ],
-  "cover": "image/goldshipPulkam/1.webp",
-  "artist": {
-    "name": "orenamonaki",
-    "url": "https://x.com/orenamonaki/status/1542093385313710080"
-  },
-  "description": "Goldship yang telah lama memutuskan untuk pulang kampung dan bertemu dengan ibunya",
-  "status": "Tamat",
-  "updatedAt": "2026-04-02",
-  "tags": [
-    "Uma Musume"
-  ],
-  "chapters": [
+      "id": "goldship_pulkam",
+      "title": "Goldship Pulkam",
+      "series": "Uma Musume",
+      "genres": [
+        "Slice of life"
+      ],
+      "cover": "image/goldshipPulkam/1.webp",
+      "artist": {
+        "name": "orenamonaki",
+        "url": "https://x.com/orenamonaki/status/1542093385313710080"
+      },
+      "description": "Goldship yang telah lama memutuskan untuk pulang kampung dan bertemu dengan ibunya",
+      "status": "Tamat",
+      "updatedAt": "2026-04-02",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 6,
+          "folder": "image/goldshipPulkam/"
+        }
+      ]
+    },
     {
-      "number": 1,
-      "pages": 6,
-      "folder": "image/goldshipPulkam/"
+      "id": "kehidupan_random_para_uma",
+      "title": "Kehidupan Random Para Uma",
+      "series": "Uma Musume",
+      "genres": [
+        "Slice of life",
+        "Comedy"
+      ],
+      "cover": "image/kehidupan_random_para_uma/1.jpg",
+      "artist": {
+        "name": "ル一キ一ドリフト",
+        "url": "https://www.pixiv.net/en/users/4489330"
+      },
+      "description": "Ya namanya juga jaran, kadang ada aja kelakukannya",
+      "status": "Ongoing",
+      "updatedAt": "2026-04-05",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 15,
+          "folder": "image/kehidupan_random_para_uma/Ch1/"
+        },
+        {
+          "number": 2,
+          "pages": 49,
+          "folder": "image/kehidupan_random_para_uma/Ch2/"
+        },
+        {
+          "number": 3,
+          "pages": 7,
+          "folder": "image/kehidupan_random_para_uma/Ch3/"
+        },
+        {
+          "number": 4,
+          "pages": 12,
+          "folder": "image/kehidupan_random_para_uma/Ch4/"
+        },
+        {
+          "number": 5,
+          "pages": 4,
+          "folder": "image/kehidupan_random_para_uma/Ch5/"
+        },
+        {
+          "number": 6,
+          "pages": 16,
+          "folder": "image/kehidupan_random_para_uma/Ch6/"
+        },
+        {
+          "number": 7,
+          "pages": 13,
+          "folder": "image/kehidupan_random_para_uma/Ch7/"
+        },
+        {
+          "number": 8,
+          "pages": 16,
+          "folder": "image/kehidupan_random_para_uma/Ch8/"
+        }
+      ]
+    },
+    {
+      "id": "arknights_the_lonely_wanderer",
+      "title": "Arknights - The lonely Wanderer",
+      "series": "Arknights",
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/Arknights_The_lonely_Wanderer/12.webp",
+      "artist": {
+        "name": "Tanoy KTB",
+        "url": "https://www.pixiv.net/en/artworks/136080174"
+      },
+      "description": "Ketika paman Mylnar yang sudah pensiun karena yang kehilangan semangat hidup, eh malah nemu berita yang membangkitkan tujuannya kembali.",
+      "status": "Tamat",
+      "updatedAt": "2026-04-05",
+      "tags": [
+        "Arknights"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 15,
+          "folder": "image/Arknights_The_lonely_Wanderer/"
+        }
+      ]
+    },
+    {
+      "id": "mon3tr",
+      "title": "Mon3tr",
+      "series": "Arknights",
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/mon3tr/1.webp",
+      "artist": {
+        "name": "Tanoy KTB",
+        "url": "https://www.pixiv.net/en/artworks/136080174"
+      },
+      "description": "Kisah munculnya Mon3tr di rhodes island ",
+      "status": "Tamat",
+      "updatedAt": "2026-04-05",
+      "tags": [
+        "Arknights"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 17,
+          "folder": "image/mon3tr/"
+        }
+      ]
+    },
+    {
+      "id": "rikuhachima_the_story",
+      "title": "Rikuhachima The story",
+      "series": "Blue archive",
+      "genres": [
+        "Drama",
+        "Thriller"
+      ],
+      "cover": "image/Rikuhachima_The_story/ch1/8.webp",
+      "artist": {
+        "name": "bakheboi",
+        "url": "https://arca.live/b/bluearchive/128733024"
+      },
+      "description": "Kivotos telah hancur oleh sebuah tragedy, kini Rikuhachima Aru harus bertahan sekaligus mencari sebuah harapan baru",
+      "status": "Tamat",
+      "updatedAt": "2026-04-05",
+      "tags": [
+        "Blue archive"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 20,
+          "folder": "image/Rikuhachima_The_story/ch1/"
+        },
+        {
+          "number": 2,
+          "pages": 20,
+          "folder": "image/Rikuhachima_The_story/ch2/"
+        },
+        {
+          "number": 3,
+          "pages": 20,
+          "folder": "image/Rikuhachima_The_story/ch3/"
+        },
+        {
+          "number": 4,
+          "pages": 20,
+          "folder": "image/Rikuhachima_The_story/ch4/"
+        },
+        {
+          "number": 5,
+          "pages": 15,
+          "folder": "image/Rikuhachima_The_story/ch5/"
+        },
+        {
+          "number": 6,
+          "pages": 25,
+          "folder": "image/Rikuhachima_The_story/ch6/"
+        },
+        {
+          "number": 7,
+          "pages": 13,
+          "folder": "image/Rikuhachima_The_story/ch7/"
+        }
+      ]
+    },
+    {
+      "id": "penantian_playable__alter_",
+      "title": "Penantian Playable / Alter ",
+      "series": "Blue archive",
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/Penantian_Playable/ch2/1.webp",
+      "artist": {
+        "name": "雜煮",
+        "url": "https://www.pixiv.net/en/users/47011794"
+      },
+      "description": "Para Murid Blue archive yang berusaha menunggu antrean untuk menjadi playable atau dapat alter",
+      "status": "Tamat",
+      "updatedAt": "2026-04-05",
+      "tags": [
+        "Blue archive"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 13,
+          "folder": "image/Penantian_Playable/ch1/"
+        },
+        {
+          "number": 2,
+          "pages": 30,
+          "folder": "image/Penantian_Playable/ch2/"
+        }
+      ]
+    },
+    {
+      "id": "ke_sisi_jiwa_yang_lain",
+      "title": "Ke sisi Jiwa yang lain",
+      "series": "Uma Musume",
+      "genres": [
+        "Drama"
+      ],
+      "cover": "image/Ke_sisi_Jiwa_yang_lain/1.webp",
+      "artist": {
+        "name": "yu_cat222",
+        "url": "https://www.pixiv.net/en/artworks/90133817"
+      },
+      "description": "Walau mereka telah tiada, nama mereka tetap dikenang dan tetap diteruskan oleh para Uma Musume hingga kini dan masa depan",
+      "status": "Tamat",
+      "updatedAt": "2026-04-05",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 7,
+          "folder": "image/Ke_sisi_Jiwa_yang_lain/"
+        }
+      ]
+    },
+    {
+      "id": "mesin_gachapon_",
+      "title": "Mesin Gachapon ",
+      "series": "Girl's Frontline",
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/Mesin_Gachapon/1.webp",
+      "artist": {
+        "name": " Ruki1a",
+        "url": "https://x.com/Hhzfmd/status/2004169380322857419"
+      },
+      "description": "Siapa juga yang kepikiran naruh CD di gachapon",
+      "status": "Tamat",
+      "updatedAt": "2026-04-05",
+      "tags": [
+        "Girl's Frontline"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 8,
+          "folder": "image/Mesin_Gachapon/"
+        }
+      ]
+    },
+    {
+      "id": "jika_aku_menang_hari_ini",
+      "title": "Jika Aku Menang Hari Ini",
+      "series": "Uma Musume",
+      "genres": [
+        "drama"
+      ],
+      "cover": "image/Jika_Aku_Menang_Hari_Ini/1.webp",
+      "artist": {
+        "name": "higheast",
+        "url": "https://x.com/higheast/status/1611291914292326402?s=20"
+      },
+      "description": "Sesaat sebelum URA Finals dimulai, Nature menghentikan langkahnya. Di antara rasa gugup dan harapan yang membuncah, ia menitipkan sebuah permintaan sederhana namun mendalam pada sang Trainer",
+      "status": "Tamat",
+      "updatedAt": "2026-04-06",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 7,
+          "folder": "image/Jika_Aku_Menang_Hari_Ini/"
+        }
+      ]
     }
-  ]
-}
-
-
   ]
 }

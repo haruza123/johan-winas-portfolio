@@ -278,5 +278,4 @@
     init();
   }
 })();
-
 console.log(`${chapter.folder}/${page}.png`);
