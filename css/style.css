@@ -22,7 +22,7 @@
 
   --font: "DM Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --transition: 0.22s ease;
-  --theme-transition: 0.3s ease;
+  --theme-transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   --header-h: 64px;
 
   /* Reader settings (overridable via JS) */
@@ -174,21 +174,36 @@ a {
   transform: translateY(22px) rotate(2deg);
 }
 
+.brand-oc__img--left,
+.brand-oc__img--right {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--theme-transition), transform var(--theme-transition), visibility var(--theme-transition);
+}
+
 /* OC visibility based on theme (data-oc set by JS) */
 body[data-oc="ryou"] .brand-oc__img--left {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(16px) rotate(-2deg) scale(0.95);
 }
 
 body[data-oc="ryou"] .brand-oc__img--right {
-  display: block;
+  visibility: visible;
+  opacity: 0.12;
+  transform: translateY(22px) rotate(2deg) scale(1);
 }
 
 body[data-oc="himori"] .brand-oc__img--right {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(22px) rotate(2deg) scale(0.95);
 }
 
 body[data-oc="himori"] .brand-oc__img--left {
-  display: block;
+  visibility: visible;
+  opacity: 0.12;
+  transform: translateY(16px) rotate(-2deg) scale(1);
 }
 
 /* Keep content above the background OCs */
@@ -667,13 +682,59 @@ body[data-theme="light"] .btn--ghost:hover {
    Filter (cinematic hook)
    -------------------------------------------------------------------------- */
    .sort-select {
-  padding: 6px 12px;
+  appearance: none;
+  padding: 10px 42px 10px 18px;
   border-radius: 999px;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='white' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center;
   color: var(--text-primary);
-  font-size: 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  min-width: 180px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sort-select:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 3px rgba(93, 224, 230, 0.2);
+}
+
+body[data-theme="light"] .sort-select {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.85) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='black' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center;
+  color: #1a1311;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="light"] .sort-select:hover {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+body[data-theme="light"] .sort-select:focus {
+  border-color: var(--accent-coral);
+  box-shadow: 0 0 0 3px rgba(217, 43, 58, 0.2);
+}
+
+.sort-select option {
+  background-color: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+body[data-theme="light"] .sort-select option {
+  background-color: #ffffff;
+  color: #1a1311;
 }
 
 .load-more-wrap {
@@ -681,11 +742,14 @@ body[data-theme="light"] .btn--ghost:hover {
   justify-content: center;
   margin-top: 24px;
 }
+
 .filter-bar {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 16px 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .filter-group {
@@ -994,29 +1058,37 @@ body[data-theme="light"] .loader-inner {
   transform: translateY(26px) rotate(-2deg);
 }
 
+.hero__oc--left, .hero__oc--right {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+}
+
 /* OC visibility in hero */
 body[data-oc="ryou"] .hero__oc--left {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(26px) rotate(-2deg) scale(0.95);
 }
 
 body[data-oc="ryou"] .hero__oc--right {
-  display: block;
+  visibility: visible;
+  opacity: 0.94;
+  transform: translateY(8px) rotate(1deg) scale(1);
 }
 
 body[data-oc="himori"] .hero__oc--right {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(8px) rotate(1deg) scale(0.95);
 }
 
 body[data-oc="himori"] .hero__oc--left {
-  display: block;
-}
-
-/* When Himori is active, place her in the main (right) hero slot */
-body[data-oc="himori"] .hero__oc--left {
+  visibility: visible;
+  opacity: 0.94;
   left: auto;
   right: -58px;
-  opacity: 0.94;
-  transform: translateY(10px) rotate(-1deg);
+  transform: translateY(10px) rotate(-1deg) scale(1);
 }
 
 /* Light theme tweak for hero surface */
@@ -1051,6 +1123,52 @@ body[data-theme="light"] .hero__desc {
 /* body[data-theme="light"] .hero__subtitle {
   color: rgba(26, 19, 17, 0.78);
 } */
+
+
+/* =========================================
+   HERO TITLE ANIMATION
+========================================= */
+
+.hero__title {
+  transition: all 0.3s ease;
+}
+
+/* 🌙 RYOU (sharp & cool) */
+.hero__title.is-ryou {
+  animation: ryouFade 0.35s ease;
+}
+
+@keyframes ryouFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ☀️ HIMORI (playful & soft) */
+.hero__title.is-himori {
+  animation: himoriPop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+@keyframes himoriPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) rotate(-1deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05) rotate(1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
 
 /* --------------------------------------------------------------------------
    Latest — horizontal scroll, hidden scrollbar

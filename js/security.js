@@ -5,7 +5,7 @@
 
   // --- CONFIG ---
   // Ubah ke false jika ingin mematikan fitur anti-screenshot/print screen
-  const ENABLE_ANTI_SCREENSHOT = true;
+  const ENABLE_ANTI_SCREENSHOT = false;
   let violationCount = 0;
   // --------------
 
@@ -78,7 +78,10 @@ rare: [
 function pickDialog(poolObj) {
   const isRare = Math.random() < 0.1; 
   const pool = isRare && poolObj.rare?.length ? poolObj.rare : poolObj.common;
-  return pool[Math.floor(Math.random() * pool.length)];
+  return {
+    text: pool[Math.floor(Math.random() * pool.length)],
+    isRare: isRare && poolObj.rare?.length > 0
+  };
 }
 
   function showSecurityDialog() {
@@ -137,10 +140,38 @@ function pickDialog(poolObj) {
     // const pool = SECURITY_DIALOG[type];
     // const text = pool[Math.floor(Math.random() * pool.length)];
     const poolObj = SECURITY_DIALOG[type];
-const text = pickDialog(poolObj);
+    const { text, isRare } = pickDialog(poolObj);
 
     document.getElementById('sec-modal-name').textContent = name;
     document.getElementById('sec-modal-text').textContent = text;
+    
+    // reset some styles incase it toggles theme
+    document.getElementById('sec-modal-name').style.color = theme === 'light' ? '#ff6b81' : '#ffaa00';
+    box.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+    box.style.animation = '';
+    
+    if (isRare) {
+      // Rare styling
+      box.style.border = theme === 'light' ? '2px solid #ff4757' : '2px solid #ffd700';
+      box.style.boxShadow = theme === 'light' ? '0 0 25px rgba(255, 71, 87, 0.5)' : '0 0 25px rgba(255, 215, 0, 0.5)';
+      
+      if (!document.getElementById('rare-anim-style')) {
+        const rareStyle = document.createElement('style');
+        rareStyle.id = 'rare-anim-style';
+        rareStyle.innerHTML = `
+          @keyframes popRare {
+            0% { transform: scale(0.9) rotate(-3deg); }
+            50% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1) rotate(0); }
+          }
+        `;
+        document.head.appendChild(rareStyle);
+      }
+      
+      box.style.animation = 'popRare 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      document.getElementById('sec-modal-name').textContent += ' ✨ (RARE!)';
+      document.getElementById('sec-modal-name').style.color = theme === 'light' ? '#ff4757' : '#ffd700';
+    }
     
     modal.style.display = 'flex';
     // trigger reflow

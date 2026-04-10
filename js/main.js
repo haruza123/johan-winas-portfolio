@@ -158,6 +158,12 @@ document
 
 
 function updateFilter() {
+  const seriesSelect = document.getElementById("series-select");
+  const genreSelect = document.getElementById("genre-select");
+  
+  const selectedSeries = seriesSelect ? seriesSelect.value : "";
+  const selectedGenre = genreSelect ? genreSelect.value : "";
+
   const filtered = mangaList.filter((m) => {
     const matchSeries = !selectedSeries || m.series === selectedSeries;
     const matchGenre =
@@ -335,41 +341,24 @@ function populateFilters(list) {
   const seriesEl = document.getElementById("filter-series");
   const genreEl = document.getElementById("filter-genre");
 
-  seriesEl.innerHTML = `<button class="filter-chip active" data-series="">Semua Series</button>`;
-  genreEl.innerHTML = `<button class="filter-chip active" data-genre="">Semua Genre</button>`;
-
+  let seriesHTML = `<select id="series-select" class="sort-select">
+    <option value="">Semua Series</option>`;
+  
   getAllSeries(list).forEach((s) => {
-    seriesEl.innerHTML += `<button class="filter-chip" data-series="${s}">${s}</button>`;
+    seriesHTML += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`;
   });
+  seriesHTML += `</select>`;
+  seriesEl.innerHTML = seriesHTML;
 
+  let genreHTML = `<select id="genre-select" class="sort-select">
+    <option value="">Semua Genre</option>`;
+  
   getAllGenres(list).forEach((g) => {
-    genreEl.innerHTML += `<button class="filter-chip" data-genre="${g}">${g}</button>`;
+    genreHTML += `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`;
   });
+  genreHTML += `</select>`;
+  genreEl.innerHTML = genreHTML;
 }
-let selectedSeries = "";
-let selectedGenre = "";
-
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("filter-chip")) {
-    // reset active
-    const group = e.target.parentElement;
-    group
-      .querySelectorAll(".filter-chip")
-      .forEach((btn) => btn.classList.remove("active"));
-
-    e.target.classList.add("active");
-
-    if (e.target.dataset.series !== undefined) {
-      selectedSeries = e.target.dataset.series;
-    }
-
-    if (e.target.dataset.genre !== undefined) {
-      selectedGenre = e.target.dataset.genre;
-    }
-
-    updateFilter();
-  }
-});
 
 function filterManga(list) {
   const series = document.getElementById("filter-series").value;
@@ -525,29 +514,67 @@ function applyHeroPersonality() {
   const subtitleEl = document.querySelector('[data-field="heroSubtitle"]');
   const titleEl = document.querySelector(".hero__headline-text");
   const descEl = document.querySelector('[data-field="heroDescription"]');
+  const heroTitle = document.getElementById("hero-title");
 
-  if (theme === "light") {
-    // 🌞 HIMORI MODE
-    if (subtitleEl)
-      subtitleEl.textContent = "Manga Translator • Bringing Stories to Life ✨";
+  const elsToFade = [subtitleEl, titleEl, descEl].filter(Boolean);
+  
+  // fade out
+  elsToFade.forEach(el => {
+    el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(4px)';
+  });
 
-    if (titleEl)
-      titleEl.textContent = "Terjemahan yang terasa asli—ritmenya tetap hidup~";
+  setTimeout(() => {
+    if (theme === "light") {
+      // 🌞 HIMORI MODE
+      if (heroTitle) {
+        // reset animation dulu
+        heroTitle.classList.remove("is-ryou", "is-himori");
 
-    if (descEl)
-      descEl.textContent =
-        "Aku menerjemahkan dengan gaya natural dan penuh rasa~ Yuk baca atau request judul favoritmu!";
-  } else {
-    // 🌙 RYOU MODE
-    if (subtitleEl)
-      subtitleEl.textContent = "Manga Translator • Precision & Consistency";
+        // force reflow biar animasi bisa replay
+        void heroTitle.offsetWidth;
 
-    if (titleEl) titleEl.textContent = "Terjemahan akurat—ritme tetap terjaga.";
+        heroTitle.textContent = "Rizqi Winas";
+        heroTitle.classList.add("is-himori");
+      }
 
-    if (descEl)
-      descEl.textContent =
-        "Menerjemahkan dengan presisi tinggi, menjaga makna dan nuansa tetap utuh.";
-  }
+      if (subtitleEl)
+        subtitleEl.textContent = "Manga Translator • Bringing Stories to Life ✨";
+
+      if (titleEl)
+        titleEl.textContent = "Terjemahan yang terasa asli—ritmenya tetap hidup~";
+
+      if (descEl)
+        descEl.textContent =
+          "Aku menerjemahkan dengan gaya natural dan penuh rasa~ Yuk baca atau request judul favoritmu!";
+    } else {
+      // 🌙 RYOU MODE
+      if (heroTitle) {
+        // reset animation dulu
+        heroTitle.classList.remove("is-ryou", "is-himori");
+        void heroTitle.offsetWidth;
+
+        heroTitle.textContent = "Johan Winas TL";
+        heroTitle.classList.add("is-ryou");
+      }
+
+      if (subtitleEl)
+        subtitleEl.textContent = "Manga Translator • Precision & Consistency";
+
+      if (titleEl) titleEl.textContent = "Terjemahan akurat—ritme tetap terjaga.";
+
+      if (descEl)
+        descEl.textContent =
+          "Menerjemahkan dengan presisi tinggi, menjaga makna dan nuansa tetap utuh.";
+    }
+
+    // fade in
+    elsToFade.forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
+  }, 250);
 }
 
 function applyShortSectionPersonality() {
