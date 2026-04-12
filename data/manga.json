@@ -703,7 +703,7 @@
       "title": "Jika Aku Menang Hari Ini",
       "series": "Uma Musume",
       "genres": [
-        "drama"
+        "Drama"
       ],
       "cover": "image/Jika_Aku_Menang_Hari_Ini/1.webp",
       "artist": {
@@ -721,6 +721,59 @@
           "number": 1,
           "pages": 7,
           "folder": "image/Jika_Aku_Menang_Hari_Ini/"
+        }
+      ]
+    },
+    {
+      "id": "jika_aku_menang_hari_ini",
+      "title": "Jika Aku Menang Hari Ini",
+      "series": "Uma Musume",
+      "genres": [
+        "Drama"
+      ],
+      "cover": "image/Jika_Aku_Menang_Hari_Ini/1.webp",
+      "artist": {
+        "name": "higheast",
+        "url": "https://x.com/higheast/status/1611291914292326402?s=20"
+      },
+      "description": "Sesaat sebelum URA Finals dimulai, Nature menghentikan langkahnya. Di antara rasa gugup dan harapan yang membuncah, ia menitipkan sebuah permintaan sederhana namun mendalam pada sang Trainer",
+      "status": "Tamat",
+      "updatedAt": "2026-04-06",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 7,
+          "folder": "image/Jika_Aku_Menang_Hari_Ini/"
+        }
+      ]
+    },
+    {
+      "id": "penyelamatan_sensei_oleh_izuna",
+      "title": "Penyelamatan Sensei Oleh Izuna",
+      "series": "Blue Archive",
+      "genres": [
+        "Drama",
+        "Thriller"
+      ],
+      "cover": "image/Penyelamatan_sensei_oleh_izuna/1.webp",
+      "artist": {
+        "name": "@ki_no_nekko",
+        "url": "https://x.com/ki_no_nekko?lang=id"
+      },
+      "description": "Izuna bergegas menyusup ke markas musuh untuk menyelamatkan Sensei yang diculik. Namun, sebuah jebakan psikologis yang licik dari bos Kaiser membuat garis antara kawan dan lawan menjadi kabur. Sebuah kisah tragis tentang kesetiaan, rasa bersalah, dan harga yang harus dibayar dari sebuah kesalahan fatal",
+      "status": "Tamat",
+      "updatedAt": "2026-04-12",
+      "tags": [
+        "Blue Archive"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 15,
+          "folder": "image/Penyelamatan_sensei_oleh_izuna/"
         }
       ]
     }
