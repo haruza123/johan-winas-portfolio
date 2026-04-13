@@ -725,32 +725,6 @@
       ]
     },
     {
-      "id": "jika_aku_menang_hari_ini",
-      "title": "Jika Aku Menang Hari Ini",
-      "series": "Uma Musume",
-      "genres": [
-        "Drama"
-      ],
-      "cover": "image/Jika_Aku_Menang_Hari_Ini/1.webp",
-      "artist": {
-        "name": "higheast",
-        "url": "https://x.com/higheast/status/1611291914292326402?s=20"
-      },
-      "description": "Sesaat sebelum URA Finals dimulai, Nature menghentikan langkahnya. Di antara rasa gugup dan harapan yang membuncah, ia menitipkan sebuah permintaan sederhana namun mendalam pada sang Trainer",
-      "status": "Tamat",
-      "updatedAt": "2026-04-06",
-      "tags": [
-        "Uma Musume"
-      ],
-      "chapters": [
-        {
-          "number": 1,
-          "pages": 7,
-          "folder": "image/Jika_Aku_Menang_Hari_Ini/"
-        }
-      ]
-    },
-    {
       "id": "penyelamatan_sensei_oleh_izuna",
       "title": "Penyelamatan Sensei Oleh Izuna",
       "series": "Blue Archive",
@@ -774,6 +748,32 @@
           "number": 1,
           "pages": 15,
           "folder": "image/Penyelamatan_sensei_oleh_izuna/"
+        }
+      ]
+    },
+        {
+      "id": "Perkelahian_kucing_di_Schale",
+      "title": "Perkelahian kucing di Schale",
+      "series": "Blue Archive",
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/Perkelahian_kucing_di_Schale/1.png",
+      "artist": {
+        "name": "@Baoh_kagero",
+        "url": "https://www.pixiv.net/en/artworks/131845195"
+      },
+      "description": "Niat menemani Sensei lembur berubah jadi adu gengsi antara Kazusa dan Kikyou. Kekacauan memuncak saat Shiroko muncul dengan standar estetika, hingga terungkap siapa yang diam-diam memanfaatkan momen dan keluar sebagai pemenang.",
+      "status": "Tamat",
+      "updatedAt": "2026-04-15",
+      "tags": [
+        "Blue Archive"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 10,
+          "folder": "image/Perkelahian_kucing_di_Schale/"
         }
       ]
     }
