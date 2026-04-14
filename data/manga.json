@@ -751,7 +751,7 @@
         }
       ]
     },
-        {
+    {
       "id": "Perkelahian_kucing_di_Schale",
       "title": "Perkelahian kucing di Schale",
       "series": "Blue Archive",
@@ -765,7 +765,7 @@
       },
       "description": "Niat menemani Sensei lembur berubah jadi adu gengsi antara Kazusa dan Kikyou. Kekacauan memuncak saat Shiroko muncul dengan standar estetika, hingga terungkap siapa yang diam-diam memanfaatkan momen dan keluar sebagai pemenang.",
       "status": "Tamat",
-      "updatedAt": "2026-04-15",
+      "updatedAt": "2026-04-13",
       "tags": [
         "Blue Archive"
       ],
@@ -774,6 +774,32 @@
           "number": 1,
           "pages": 10,
           "folder": "image/Perkelahian_kucing_di_Schale/"
+        }
+      ]
+    },
+    {
+      "id": "the_first_step_to_overlord",
+      "title": "The First Step to Overlord",
+      "series": "Uma Musume",
+      "genres": [
+        "Drama"
+      ],
+      "cover": "image/The_First_Step_to_Overlord/2.webp",
+      "artist": {
+        "name": "@mokuro_uma",
+        "url": "https://x.com/mokuro_uma/status/1969767171707572428"
+      },
+      "description": "Terinspirasi legenda Oguri Cap, T.M. Opera O bertekad menciptakan era baru. Dengan ambisi membara dan dukungan dari orang terdekat, ia menantang takdir di Satsuki Sho demi membuktikan dirinya sebagai pusat lintasan.",
+      "status": "Tamat",
+      "updatedAt": "2026-04-14",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 27,
+          "folder": "image/The_First_Step_to_Overlord/"
         }
       ]
     }
