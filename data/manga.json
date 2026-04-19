@@ -802,6 +802,59 @@
           "folder": "image/The_First_Step_to_Overlord/"
         }
       ]
+    },
+    {
+      "id": "Gold_City_dengan_panggilan_barunya",
+      "title": "Gold City dengan panggilan barunya",
+      "series": "Uma Musume",
+      "genres": [
+        "Comedy"
+      ],
+      "cover": "image/Gold_City_dengan_panggilan_barunya/1.webp",
+      "artist": {
+        "name": "@mokuro_uma",
+        "url": "https://x.com/mokuro_uma/status/1969767171707572428"
+      },
+      "description": "Dilanda cemburu dan iming-iming tiket onsen, Gold City nekat tampil gila-gilaan dengan lagu Brainrot. Sayangnya, kamera sudah siap merekam semuanya demi “hiburan”",
+      "status": "Tamat",
+      "updatedAt": "2026-04-17",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 12,
+          "folder": "image/Gold_City_dengan_panggilan_barunya/"
+        }
+      ]
+    },
+        {
+      "id": "kehidupan_random_para_Doll",
+      "title": "Kehidupan Random Para Doll",
+      "series": "Girl's Frontline",
+      "genres": [
+        "Slice of life",
+        "Comedy"
+      ],
+      "cover": "image/kehidupan_random_para_Doll/1.jpg",
+      "artist": {
+        "name": "ル一キ一ドリフト",
+        "url": "https://www.pixiv.net/en/users/4489330"
+      },
+      "description": "Ya namanya juga Doll, kadang ada aja kelakukannya",
+      "status": "Ongoing",
+      "updatedAt": "2026-04-19",
+      "tags": [
+        "Uma Musume"
+      ],
+      "chapters": [
+        {
+          "number": 1,
+          "pages": 15,
+          "folder": "image/kehidupan_random_para_Doll/Ch1/"
+        }
+      ]
     }
   ]
 }

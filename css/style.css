@@ -2237,6 +2237,28 @@ body.reader-no-blur .reader-page-img.is-loading {
   opacity: 1;
 }
 
+/* =========================
+   MOBILE FIX FILTER
+========================= */
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column; /* jadi vertical */
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .filter-bar select,
+  .sort-select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .filter-group {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
 @keyframes reader-shimmer {
   0% {
     background-position: 200% 0;
