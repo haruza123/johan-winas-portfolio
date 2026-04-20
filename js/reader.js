@@ -42,13 +42,19 @@ function normalizeReaderSettings(settings) {
   const equalize = s.equalize !== false; // default true
   const fit = s.fit === "cover" ? "cover" : "contain";
   const frameRatioMode = s.frameRatioMode === "uniform" ? "uniform" : "auto";
+  const noBlurLoading = s.noBlurLoading === true;
 
   return {
     zoomPct: zoomClamped,
     equalize,
     fit,
     frameRatioMode,
+    noBlurLoading,
   };
+}
+
+function defaultReaderSettings() {
+  return normalizeReaderSettings({});
 }
 
 function applyReaderSettings(settings) {
@@ -64,42 +70,58 @@ function applyReaderSettings(settings) {
     "reader-equalize-uniform",
     Boolean(s.equalize && s.frameRatioMode === "uniform"),
   );
+  body.classList.toggle("reader-no-blur", Boolean(s.noBlurLoading));
 
   return s;
 }
 
-function createReaderSettingsModal(currentSettings, onChange) {
+function createReaderSettingsModal(currentSettings, readingMode, onChange) {
   const overlay = document.createElement("div");
   overlay.className = "reader-settings-overlay";
   overlay.setAttribute("role", "dialog");
   overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-labelledby", "reader-settings-title");
+
+  let draft = { ...normalizeReaderSettings(currentSettings) };
+  const rm = readingMode === "page" ? "page" : "scroll";
 
   overlay.innerHTML = `
     <div class="reader-settings-panel">
       <div class="reader-settings-head">
-        <h2 class="reader-settings-title">Pengaturan Baca</h2>
+        <h2 class="reader-settings-title" id="reader-settings-title">Pengaturan baca</h2>
         <button class="btn btn--ghost" type="button" data-action="close">Tutup</button>
       </div>
       <div class="reader-settings-body">
         <div class="reader-setting-row">
+          <div class="reader-setting-row__label">Mode baca</div>
+          <select class="reader-controls__select" data-setting="readingMode">
+            <option value="scroll" ${rm === "scroll" ? "selected" : ""}>Scroll (webtoon)</option>
+            <option value="page" ${rm === "page" ? "selected" : ""}>Halaman (tap kiri/kanan)</option>
+          </select>
+          <div class="reader-setting-hint">
+            Mode halaman mengurutkan satu gambar per layar; geser kiri/kanan di area gambar.
+          </div>
+        </div>
+
+        <div class="reader-setting-row">
           <div class="reader-setting-row__label">Zoom</div>
           <input type="range" min="80" max="140" step="5" value="${escapeHtml(
-            String(currentSettings.zoomPct),
+            String(draft.zoomPct),
           )}" data-setting="zoomPct" />
-          <div class="reader-progress" style="text-align:left;">
-            <span data-label="zoomPct">${escapeHtml(String(currentSettings.zoomPct))}</span>%
+          <div class="reader-setting-value">
+            <span data-label="zoomPct">${escapeHtml(String(draft.zoomPct))}</span>%
           </div>
         </div>
 
         <div class="reader-setting-row reader-setting-row--checkbox">
           <label>
             <input type="checkbox" data-setting="equalize" ${
-              currentSettings.equalize ? "checked" : ""
+              draft.equalize ? "checked" : ""
             } />
             Samakan ukuran halaman
           </label>
-          <div class="reader-progress" style="text-align:left;">
-            Semua halaman ditampilkan pada frame ukuran sama (tanpa crop).
+          <div class="reader-setting-hint">
+            Semua halaman dalam frame ukuran sama (tanpa crop).
           </div>
         </div>
 
@@ -107,10 +129,10 @@ function createReaderSettingsModal(currentSettings, onChange) {
           <div class="reader-setting-row__label">Mode gambar</div>
           <select class="reader-controls__select" data-setting="fit">
             <option value="contain" ${
-              currentSettings.fit === "contain" ? "selected" : ""
+              draft.fit === "contain" ? "selected" : ""
             }>Contain (tanpa crop)</option>
             <option value="cover" ${
-              currentSettings.fit === "cover" ? "selected" : ""
+              draft.fit === "cover" ? "selected" : ""
             }>Cover (penuh, bisa terpotong)</option>
           </select>
         </div>
@@ -119,15 +141,31 @@ function createReaderSettingsModal(currentSettings, onChange) {
           <div class="reader-setting-row__label">Rasio frame</div>
           <select class="reader-controls__select" data-setting="frameRatioMode">
             <option value="auto" ${
-              currentSettings.frameRatioMode === "auto" ? "selected" : ""
+              draft.frameRatioMode === "auto" ? "selected" : ""
             }>Auto (ikuti gambar, jarak rapat)</option>
             <option value="uniform" ${
-              currentSettings.frameRatioMode === "uniform" ? "selected" : ""
+              draft.frameRatioMode === "uniform" ? "selected" : ""
             }>Uniform (semua sama)</option>
           </select>
-          <div class="reader-progress" style="text-align:left;">
-            Gunakan Auto untuk halaman kotak/lebar agar tidak ada ruang kosong besar.
+          <div class="reader-setting-hint">
+            Auto cocok untuk halaman kotak/lebar agar tidak ada ruang kosong besar.
           </div>
+        </div>
+
+        <div class="reader-setting-row reader-setting-row--checkbox">
+          <label>
+            <input type="checkbox" data-setting="noBlurLoading" ${
+              draft.noBlurLoading ? "checked" : ""
+            } />
+            Tanpa blur saat memuat gambar
+          </label>
+          <div class="reader-setting-hint">
+            Matikan efek blur pada placeholder (lebih ringan di perangkat lemah).
+          </div>
+        </div>
+
+        <div class="reader-settings-actions">
+          <button class="btn btn--ghost" type="button" data-action="reset">Reset default</button>
         </div>
       </div>
     </div>
@@ -138,33 +176,64 @@ function createReaderSettingsModal(currentSettings, onChange) {
     document.body.classList.remove("reader-settings-open");
   }
 
+  function commit(next) {
+    draft = normalizeReaderSettings(next);
+    onChange(draft);
+  }
+
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay) close();
   });
 
   overlay.querySelector('[data-action="close"]')?.addEventListener("click", close);
 
+  overlay.querySelector('[data-action="reset"]')?.addEventListener("click", () => {
+    const def = defaultReaderSettings();
+    draft = { ...def };
+    overlay.querySelector('[data-setting="zoomPct"]').value = String(def.zoomPct);
+    overlay.querySelector('[data-label="zoomPct"]').textContent = String(def.zoomPct);
+    overlay.querySelector('[data-setting="equalize"]').checked = def.equalize;
+    overlay.querySelector('[data-setting="fit"]').value = def.fit;
+    overlay.querySelector('[data-setting="frameRatioMode"]').value = def.frameRatioMode;
+    overlay.querySelector('[data-setting="noBlurLoading"]').checked = def.noBlurLoading;
+    commit(draft);
+  });
+
+  overlay.querySelector('[data-setting="readingMode"]')?.addEventListener("change", (e) => {
+    const next = String(e.target.value || "scroll") === "page" ? "page" : "scroll";
+    if (next !== readingMode) {
+      localStorage.setItem("readingMode", next);
+      window.location.reload();
+    }
+  });
+
   overlay.querySelector('[data-setting="zoomPct"]')?.addEventListener("input", (e) => {
     const value = Number(e.target.value) || 100;
     overlay.querySelector('[data-label="zoomPct"]').textContent = String(value);
-    onChange({ ...currentSettings, zoomPct: value });
+    commit({ ...draft, zoomPct: value });
   });
 
   overlay.querySelector('[data-setting="equalize"]')?.addEventListener("change", (e) => {
-    onChange({ ...currentSettings, equalize: Boolean(e.target.checked) });
+    commit({ ...draft, equalize: Boolean(e.target.checked) });
   });
 
   overlay.querySelector('[data-setting="fit"]')?.addEventListener("change", (e) => {
-    onChange({ ...currentSettings, fit: String(e.target.value || "contain") });
+    commit({ ...draft, fit: String(e.target.value || "contain") });
   });
 
   overlay
     .querySelector('[data-setting="frameRatioMode"]')
     ?.addEventListener("change", (e) => {
-      onChange({
-        ...currentSettings,
+      commit({
+        ...draft,
         frameRatioMode: String(e.target.value || "auto"),
       });
+    });
+
+  overlay
+    .querySelector('[data-setting="noBlurLoading"]')
+    ?.addEventListener("change", (e) => {
+      commit({ ...draft, noBlurLoading: Boolean(e.target.checked) });
     });
 
   document.addEventListener(
@@ -488,42 +557,171 @@ function renderPages(container, manga, chapterNumber, pages) {
   }
 }
 
-// ✅ TARUH DI SINI
-function enablePageMode(container) {
-  const imgs = Array.from(container.querySelectorAll("img"));
+function enablePageMode(container, options) {
+  const frames = Array.from(container.querySelectorAll(".reader-page-frame"));
+  const onPageChange =
+    options && typeof options.onPageChange === "function"
+      ? options.onPageChange
+      : null;
+
+  if (!frames.length) return () => {};
 
   let current = 0;
+  let touchStartX = null;
+  let touchStartY = null;
+  let viewport = null;
+  let track = null;
+  let resizeRaf = 0;
 
-function showPage(index) {
-  imgs.forEach((img, i) => {
-    img.style.display = i === index ? "block" : "none";
-  });
+  function buildViewport() {
+    viewport = document.createElement("div");
+    viewport.className = "reader-page-viewport";
 
-  current = index;
+    track = document.createElement("div");
+    track.className = "reader-page-track";
 
-  // ✅ UPDATE PROGRESS BAR
-  const percent = ((index + 1) / imgs.length) * 100;
-  const bar = document.getElementById("reader-progress-fill");
-  if (bar) bar.style.width = percent + "%";
+    frames.forEach((f) => track.appendChild(f));
+    viewport.appendChild(track);
 
-  // ✅ UPDATE TEXT PAGE
-  const progressText = document.getElementById("reader-progress");
-  if (progressText) {
-    progressText.textContent = `Page ${index + 1} / ${imgs.length}`;
+    const leftZone = document.createElement("button");
+    leftZone.type = "button";
+    leftZone.className = "reader-tapzone reader-tapzone--left";
+    leftZone.setAttribute("aria-label", "Halaman sebelumnya");
+
+    const rightZone = document.createElement("button");
+    rightZone.type = "button";
+    rightZone.className = "reader-tapzone reader-tapzone--right";
+    rightZone.setAttribute("aria-label", "Halaman selanjutnya");
+
+    viewport.appendChild(leftZone);
+    viewport.appendChild(rightZone);
+
+    leftZone.addEventListener("click", () => {
+      if (current > 0) showPage(current - 1);
+    });
+    rightZone.addEventListener("click", () => {
+      if (current < frames.length - 1) showPage(current + 1);
+    });
+
+    container.classList.add("page-mode");
+    container.innerHTML = "";
+    container.appendChild(viewport);
   }
-}
 
+  function setViewportHeight() {
+    if (!viewport) return;
+    window.cancelAnimationFrame(resizeRaf);
+    resizeRaf = window.requestAnimationFrame(() => {
+      const controls = document.querySelector(".reader-controls");
+      const header = document.querySelector(".site-header");
+      const controlsH = controls ? controls.getBoundingClientRect().height : 0;
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const top = viewport.getBoundingClientRect().top;
+
+      // Keep a small gap above controls so content never sits behind it.
+      const gap = 16;
+      const available = window.innerHeight - controlsH - gap - top;
+      const minH = 220;
+      const h = Math.max(minH, Math.floor(available));
+      viewport.style.height = `${h}px`;
+    });
+  }
+
+  function showPage(index) {
+    const max = frames.length - 1;
+    const next = Math.min(max, Math.max(0, index));
+    current = next;
+
+    if (track) {
+      track.style.transform = `translate3d(-${current * 100}%, 0, 0)`;
+    }
+    setViewportHeight();
+
+    const percent = ((current + 1) / frames.length) * 100;
+    const bar = document.getElementById("reader-progress-fill");
+    if (bar) bar.style.width = `${percent}%`;
+
+    const progressText = document.getElementById("reader-progress");
+    if (progressText) {
+      progressText.textContent = `Page ${current + 1} / ${frames.length}`;
+    }
+
+    onPageChange?.(current, frames.length);
+  }
+
+  buildViewport();
   showPage(0);
 
-  container.addEventListener("click", (e) => {
-    const half = window.innerWidth / 2;
+  container.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0]?.screenX ?? null;
+      touchStartY = e.changedTouches[0]?.screenY ?? null;
+    },
+    { passive: true },
+  );
 
-    if (e.clientX > half) {
-      if (current < imgs.length - 1) showPage(current + 1);
-    } else {
+  container.addEventListener(
+    "touchend",
+    (e) => {
+      const endX = e.changedTouches[0]?.screenX;
+      const endY = e.changedTouches[0]?.screenY;
+      if (touchStartX == null || endX == null) return;
+      const dx = endX - touchStartX;
+      const dy = endY != null && touchStartY != null ? endY - touchStartY : 0;
+      const threshold = 44;
+      if (Math.abs(dx) < threshold || Math.abs(dx) < Math.abs(dy)) {
+        touchStartX = null;
+        touchStartY = null;
+        return;
+      }
+      if (dx < -threshold && current < frames.length - 1) showPage(current + 1);
+      else if (dx > threshold && current > 0) showPage(current - 1);
+      touchStartX = null;
+      touchStartY = null;
+    },
+    { passive: true },
+  );
+
+  function onKey(e) {
+    if (document.body.classList.contains("reader-settings-open")) return;
+    const tag = e.target && e.target.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+
+    if (e.key === "ArrowRight" || e.key === "PageDown") {
+      e.preventDefault();
+      if (current < frames.length - 1) showPage(current + 1);
+    } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+      e.preventDefault();
       if (current > 0) showPage(current - 1);
     }
-  });
+  }
+
+  document.addEventListener("keydown", onKey);
+
+  const onResize = () => setViewportHeight();
+  window.addEventListener("resize", onResize);
+
+  // Move to top so page mode starts consistently.
+  try {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  } catch {
+    window.scrollTo(0, 0);
+  }
+
+  return () => {
+    document.removeEventListener("keydown", onKey);
+    window.removeEventListener("resize", onResize);
+    window.cancelAnimationFrame(resizeRaf);
+
+    // Restore scroll DOM
+    if (viewport && track) {
+      const restored = Array.from(track.querySelectorAll(".reader-page-frame"));
+      container.classList.remove("page-mode");
+      container.innerHTML = "";
+      restored.forEach((f) => container.appendChild(f));
+    }
+  };
 }
 
 function setupPageNavigator(container) {
@@ -578,6 +776,9 @@ function init() {
   const initialSettings = normalizeReaderSettings(loadReaderSettings());
   let currentSettings = applyReaderSettings(initialSettings) || initialSettings;
 
+  document.body.classList.remove("mode-scroll", "mode-page");
+  document.body.classList.add(readingMode === "page" ? "mode-page" : "mode-scroll");
+
   const id = getParam("id");
   const chParam = getParam("ch");
 
@@ -586,36 +787,42 @@ function init() {
   const hintEl = document.getElementById("reader-hint");
   const backEl = document.getElementById("reader-back");
 
+  // Keep bottom padding accurate so controls never cover the last page.
+  // Uses ResizeObserver so it adapts when controls layout changes (mobile / next chapter / etc).
+  const controlsEl = document.querySelector(".reader-controls");
+  const rootEl = document.documentElement;
+  if (controlsEl && rootEl && "ResizeObserver" in window) {
+    const update = () => {
+      const h = Math.ceil(controlsEl.getBoundingClientRect().height || 0);
+      if (h) rootEl.style.setProperty("--reader-controls-h", `${h}px`);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(controlsEl);
+    window.addEventListener("resize", update, { passive: true });
+  }
+
   const prevBtn = document.getElementById("prev-page");
   const nextBtn = document.getElementById("next-page");
   const actionBackBtn = document.getElementById("action-back");
   const nextChapterBtn = document.getElementById("next-chapter");
   const chapterSelect = document.getElementById("chapter-select");
-  const modeBtn = document.getElementById("mode-toggle");
   const settingsBtn = document.getElementById("reader-settings-open");
 
   if (settingsBtn) {
     settingsBtn.addEventListener("click", () => {
       document.body.classList.add("reader-settings-open");
 
-      const overlay = createReaderSettingsModal(currentSettings, (next) => {
-        currentSettings = applyReaderSettings(next) || currentSettings;
-        saveReaderSettings(currentSettings);
-      });
+      const overlay = createReaderSettingsModal(
+        currentSettings,
+        readingMode,
+        (next) => {
+          currentSettings = applyReaderSettings(next) || currentSettings;
+          saveReaderSettings(currentSettings);
+        },
+      );
 
       document.body.appendChild(overlay);
-    });
-  }
-
-  if (modeBtn) {
-    modeBtn.textContent = `Mode: ${readingMode === "scroll" ? "Scroll" : "Page"}`;
-
-    modeBtn.addEventListener("click", () => {
-      readingMode = readingMode === "scroll" ? "page" : "scroll";
-
-      localStorage.setItem("readingMode", readingMode);
-
-      location.reload(); // biar simpel
     });
   }
 
@@ -659,7 +866,9 @@ function init() {
       document.title = `${manga.title} — Chapter ${chapterNumber} — Reader`;
       titleEl.textContent = `${manga.title} — Chapter ${chapterNumber}`;
       hintEl.textContent =
-        "Scroll vertikal untuk membaca. Gunakan tombol untuk lompat halaman/chapter.";
+        readingMode === "page"
+          ? "Tap kiri/kanan pada gambar atau geser untuk halaman berikutnya/sebelumnya."
+          : "Scroll vertikal untuk membaca.";
 
       backEl.href = detailHref(manga.id);
       if (actionBackBtn) {
@@ -693,42 +902,48 @@ function init() {
       renderRecommendations(manga, list);
       setTimeout(() => {
         if (readingMode === "page") {
-          enablePageMode(pagesEl);
+          enablePageMode(pagesEl, {
+            onPageChange: (idx, total) => {
+              titleEl.textContent = `${manga.title} — Chapter ${chapterNumber} (Hal. ${idx + 1}/${total})`;
+            },
+          });
         }
       }, 300);
 
-      setTimeout(() => {
-        const nav = setupPageNavigator(pagesEl);
-        const progressEl = document.getElementById("reader-progress");
+      if (readingMode !== "page") {
+        setTimeout(() => {
+          const nav = setupPageNavigator(pagesEl);
+          const progressEl = document.getElementById("reader-progress");
 
-        function updateUI() {
-          const cur = nav.getCurrentPage();
+          function updateUI() {
+            const cur = nav.getCurrentPage();
 
-          titleEl.textContent = `${manga.title} — Chapter ${chapterNumber} (Page ${cur}/${pages})`;
+            titleEl.textContent = `${manga.title} — Chapter ${chapterNumber} (Page ${cur}/${pages})`;
 
-          if (progressEl) {
-            progressEl.textContent = `Page ${cur} / ${pages}`;
+            if (progressEl) {
+              progressEl.textContent = `Page ${cur} / ${pages}`;
+            }
           }
-        }
 
-        updateUI();
+          updateUI();
 
-        window.addEventListener("scroll", updateUI, { passive: true });
+          window.addEventListener("scroll", updateUI, { passive: true });
 
-        if (prevBtn) {
-          prevBtn.addEventListener("click", () => {
-            const cur = nav.getCurrentPage();
-            nav.scrollToPage(Math.max(1, cur - 1));
-          });
-        }
+          if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+              const cur = nav.getCurrentPage();
+              nav.scrollToPage(Math.max(1, cur - 1));
+            });
+          }
 
-        if (nextBtn) {
-          nextBtn.addEventListener("click", () => {
-            const cur = nav.getCurrentPage();
-            nav.scrollToPage(Math.min(pages, cur + 1));
-          });
-        }
-      }, 300);
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              const cur = nav.getCurrentPage();
+              nav.scrollToPage(Math.min(pages, cur + 1));
+            });
+          }
+        }, 300);
+      }
 
       const sortedChapters = chapters
         .map((c) => Number(c?.number))
@@ -759,7 +974,9 @@ function init() {
       );
     });
 
-    window.addEventListener("scroll", updateProgressBar);
+  if (readingMode !== "page") {
+    window.addEventListener("scroll", updateProgressBar, { passive: true });
+  }
 }
 
 function handleControlsPosition() {

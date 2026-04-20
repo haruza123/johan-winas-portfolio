@@ -15,7 +15,7 @@
     <script src="js/analytics.js"></script>
   </head>
   <body class="reader-page mode-scroll" data-theme="dark" data-oc="ryou">
-    <a class="skip-link" class="nav-link" href="#reader-main"
+    <a class="skip-link nav-link" href="#reader-main"
       >Langsung ke konten</a
     >
 
@@ -34,7 +34,7 @@
 
     <header class="site-header">
       <nav class="navbar" aria-label="Utama">
-        <a class="navbar__brand" class="nav-link" href="index.html"
+        <a class="navbar__brand nav-link" href="index.html"
           >Johan Winas TL</a
         >
         <div class="navbar__search-wrap">
@@ -66,8 +66,7 @@
         <div class="reader-head">
 
           <a
-            class="detail-back"
-            class="nav-link"
+            class="detail-back nav-link"
             href="index.html"
             id="reader-back"
             >← Kembali</a
@@ -81,22 +80,27 @@
             <div class="reader-progress-bar">
             <div id="reader-progress-fill"></div>
           </div>
-            <div class="reader-controls__group">
+            <div class="reader-controls__group reader-controls__group--primary">
               <a class="btn btn--ghost" id="action-back" href="#">
                 ← Kembali
               </a>
-              <button class="btn btn--ghost" id="mode-toggle">
-                Mode: Scroll
-              </button>
               <button class="btn btn--ghost" type="button" id="reader-settings-open">
                 Settings
               </button>
               <button class="btn btn--primary" type="button" id="next-chapter" style="display: none;">
                 Next Chapter →
               </button>
-              <p class="reader-progress" id="reader-progress">Page 1 / 20</p>
             </div>
-            <div class="reader-controls__group">
+            <div class="reader-controls__group reader-controls__group--pager" role="group" aria-label="Navigasi halaman">
+              <button class="btn btn--ghost reader-pager" type="button" id="prev-page" aria-label="Halaman sebelumnya">
+                ‹
+              </button>
+              <p class="reader-progress reader-progress--inline" id="reader-progress">Page 1 / 20</p>
+              <button class="btn btn--ghost reader-pager" type="button" id="next-page" aria-label="Halaman berikutnya">
+                ›
+              </button>
+            </div>
+            <div class="reader-controls__group reader-controls__group--chapter">
               <label class="visually-hidden" for="chapter-select"
                 >Pilih chapter</label
               >
