@@ -1,47 +1,54 @@
 const OC_DIALOG = {
-himori: {
-  name: "Himori 🧡",
-  messages: {
-    empty: [
-  "Waaah... kosong ya? 😅",
-  "Yah... belum ada apa-apa 😭",
-  "Eh? Kok nggak nemu apa-apa ya... 😵",
-  "Hehe~ sabar ya, lagi aku isi pelan-pelan ✨",
-  "Masih sepi nih... temenin aku dulu aja 😆",
-  "Kayaknya belum ada... nanti aku tambahin ya 😉",
-],
+  himori: {
+    name: "Himori 🧡",
+    messages: {
+      empty: [
+        "Wah, masih kosong... Tapi tenang, aku bakal 'isi' kok pelan-pelan ✨",
+        "Yah, belum ada apa-apa... Tapi ada aku di sini, nggak mau temenin dulu? 🥺🧡",
+        "Hehe~ sabar ya, aku lagi nyiapin kejutan buat kamu di sini ✨",
+        "Masih sepi... apa kita bikin 'rame' berdua aja di sini? 😜✨",
+        "Kayaknya kamu datang terlalu cepat... aku belum siap pakai baju—eh, siapin konten! 😵",
+        "Kosong ya? Sini, biar aku kasih senyuman aku dulu biar kamu nggak kecewa 😉🧡",
+      ],
 
-search: [
-  (q) => `"${q}"? Aku cari juga belum nemu 😭`,
-  (q) => `"${q}" belum ada di sini 😣`,
-  (q) => `"${q}" kayaknya belum diterjemahin deh~`,
-  (q) => `"${q}" belum muncul... mungkin nanti ya 👀`,
-  (q) => `"${q}" nggak ada... tapi bisa aku usahain 😉`,
-  (q) => `"${q}"? Hehe... aku belum ngerjain itu 😅`,
-],
+      search: [
+        (q) =>
+          `"${q}"? Aku cari ke mana-mana tetap nggak ada, kayak cintamu padaku... eh? 😭`,
+        (q) =>
+          `Duh, "${q}" belum ketemu. Apa mau aku usahain 'khusus' buat kamu? 😉✨`,
+        (q) =>
+          `"${q}" nggak ada... Tapi kalau kamu cari aku, aku selalu ada di sini kok 🧡`,
+        (q) =>
+          `Hmm, "${q}" ya? Hehe, aku belum ngerjain itu, tapi kalau kamu maksa... 😅✨`,
+        (q) =>
+          `Belum nemu "${q}"... Gimana kalau kita cari yang lain aja sambil berduaan? 😜`,
+      ],
+    },
   },
-},
 
   ryou: {
     name: "Ryou 🖤",
     messages: {
       empty: [
-        "Kosong. Jangan cuma diam, cari yang lain.",
-        "Nggak ada apa-apa di sini. Kamu salah tempat?",
-        "Masih nihil. Saya belum sempat mengisinya.",
-        "Belum ada. Jangan berharap muncul tiba-tiba.",
-        "Ruang kosong. Sepertinya kamu datang terlalu awal.",
-        "Tidak ada yang bisa dipamerkan untuk sekarang.",
+        "Kosong. Jangan cuma bengong, cari sesuatu yang bisa aku kerjakan.",
+        "Tidak ada apa-apa di sini. Kamu berharap menemukan sesuatu yang 'terlarang', ya?",
+        "Masih nihil. Sabar sedikit, atau kamu mau aku 'disiplinkan' karena tidak sabar? 🖤",
+        "Ruang kosong. Sepertinya kamu lebih suka menunggu daripada mencari yang lain.",
+        "Tidak ada yang bisa dipamerkan sekarang. Kamu mau pamerkan sesuatu ke aku?",
+        "Hasilnya nol. Sama seperti harapan kamu untuk menang dariku.",
       ],
 
       search: [
-        (q) => `"${q}"? Saya cari juga nggak ketemu.`,
-        (q) => `Nggak ada hasil buat "${q}". Coba lebih spesifik.`,
-        (q) => `"${q}" tidak ada di katalog saya. Cari yang lain saja.`,
-        (q) => `Pencarian "${q}" gagal. Jangan menyerah begitu saja.`,
-        (q) => `"${q}" belum tersedia. Sabar sedikit kenapa?`,
-        (q) => `Percuma cari "${q}". Memangnya itu layak diterjemahkan?`,
-        (q) => `Hasil untuk "${q}" nol besar. Coba tantang saya dengan judul lain.`,
+        (q) =>
+          `"${q}"? Aku cari juga nggak ketemu. Memangnya itu penting buat kamu?`,
+        (q) =>
+          `Nol besar untuk "${q}". Coba cari judul yang lebih 'menantang' buatku.`,
+        (q) =>
+          `"${q}" tidak ada di katalogku. Kenapa tidak coba minta baik-baik ke ku? 🖤`,
+        (q) => `Percuma cari "${q}". Apa menurutmu itu layak aku terjemahkan?`,
+        (q) =>
+          `Hasil pencarian "${q}" kosong. Jangan menyerah, aku suka orang yang gigih.`,
+        (q) => `"${q}"? Sepertinya seleramu cukup sulit ya. Menarik juga.`,
       ],
     },
   },
@@ -49,43 +56,43 @@ search: [
 
 const SHORT_DIALOG = {
   himori: [
-  "Eh, eh! Mampir ke FP aku yuk? Banyak yang lucu-lucu di sana ✨",
-  "Ini tempat aku iseng sebentar~ tapi aku kerjain serius kok 😆🧡",
-  "Nggak lama kok bacanya... coba deh lihat di FB 😉",
-  "Kadang cuma satu halaman... tapi gemes banget 😭✨",
-  "Hehe~ ini tempat rahasiaku... kamu mampir kan? 😜",
-  "Lagi pengen yang ringan? Di sana banyak kok 😆✨",
-],
+    "Cuma satu halaman kok... tapi bisa bikin kamu kepikiran semalaman~ 😜🧡",
+    "Lagi pengen yang 'singkat' tapi berkesan? Cek koleksi rahasiaku di FB yuk! ✨",
+    "Ini tempat aku iseng sebentar... tapi aku ngerjainnya sambil bayangin kamu loh~ 😆🧡",
+    "Jangan buru-buru, lihat yang pendek-pendek dulu di sini. Gemes banget tau! 😭✨",
+    "Mampir ke FP aku yuk? Ada banyak yang 'lucu' dan mungkin... sedikit nakal? Hehe~ 😜",
+    "Satu halaman aja nggak cukup kan? Sini, aku kasih lebih banyak di Facebook ✨",
+  ],
 
   ryou: [
-    "Terjemahan singkat. Cek langsung di Facebook, jangan manja.",
-    "Ini cuma proyek sampingan. Ambil atau tinggalkan.",
-    "Singkat dan padat. Langsung saja ke intinya.",
-    "Cuma potongan kecil, tapi kualitasnya saya jamin.",
-    "Kalau berani, coba baca hasil terjemahan saya di FB.",
-    "Di luar jalur utama, tapi tetap patut kamu lirik.",
-    "Sudah saya kumpulkan di FP. Cari sendiri kalau niat.",
-  ]
+    "Singkat dan padat. Sama seperti waktu yang aku punya untuk melayani kamu.",
+    "Hanya potongan kecil. Tapi kalau kamu nggak kuat, jangan coba-coba lihat.",
+    "Cek di Facebook. Jangan manja, aku nggak akan menyuapi kamu terus-menerus.",
+    "Kualitasnya aku jamin, meski cuma satu halaman. Mau bukti? Klik saja.",
+    "Ini cuma proyek sampingan, tapi kalau kamu berani, coba intip isinya di FP. 🖤",
+    "Sudah aku kumpulkan di sana. Cari sendiri kalau kamu memang punya niat.",
+    "Sedikit tapi mematikan. Jangan protes kalau kamu ketagihan setelah membacanya.",
+  ],
 };
 
 const DONATION_DIALOG = {
-    himori: [
-  "Uwaaa! Traktir aku es kopi yuk? Biar aku makin semangat ngetiknya ☕✨",
-  "Hehe~ kalau kamu support, aku jadi makin rajin 😆",
-  "Satu donasi kecil dari kamu... aku bakal seneng banget 🥺✨",
-  "Kalau kamu suka hasil terjemahanku... boleh ya bantu sedikit? 🥺",
-  "Hehe~ bantu aku beli camilan ya, biar gak bengong pas TL 🍪😋",
-  "Gak harus banyak kok... tapi beneran berarti buat aku ✨",
-],
+  himori: [
+    "Uwaaa! Traktir aku es kopi yuk? Biar aku makin semangat ngetik buat kamu... ☕✨",
+    "Satu donasi kecil dari kamu... bakal bikin aku senyum-senyum sendirian seharian loh 🥺✨",
+    "Hehe~ kalau kamu support, aku janji bakal lebih 'rajin' lagi manjain kamu lewat konten baru 😆🧡",
+    "Bantu aku beli camilan ya? Biar aku nggak bengong pas bayangin—eh, pas lagi TL maksudnya! 🍪😋",
+    "Gak harus banyak kok... asal dari kamu, aku pasti bakal seneng banget menerimanya ✨🥺",
+    "Kamu suka kan sama hasilnya? Kalau gitu, kasih aku sedikit 'imbalan' boleh ya? 🧡✨",
+  ],
   ryou: [
-    "Proyek ini butuh bahan bakar. Kamu tahu apa maksud saya.",
-    "Suka hasilnya? Jaga ritme saya dengan sedikit dukungan.",
-    "Sederhana saja: Ada dukungan, ada kemajuan. Mau?",
-    "Saya nggak suka basa-basi. Dukung kalau mau lanjut.",
-    "Tanpa dukungan, jangan protes kalau saya melambat.",
-    "Kontribusi kamu itu dampak nyata. Jangan cuma jadi penonton.",
-    "Mau lihat saya kerja lebih cepat? Tunjukkan dukunganmu.",
-  ]
+    "Proyek ini butuh bahan bakar. Kamu tahu kan cara kerja dunia ini? Dukung kami.",
+    "Suka hasilnya? Kalau begitu jaga ritme ku dengan sedikit dukungan. Jangan cuma gratisan.",
+    "Sederhana saja: Ada dukungan, ada kemajuan. Kamu mau aku lanjut atau berhenti di sini?",
+    "aku nggak suka basa-basi. Dukung kalau kamu memang ingin melihat lebih banyak dariku.",
+    "Tanpa dukungan, jangan protes kalau aku mendadak hilang atau melambat. Paham?",
+    "Mau lihat aku kerja lebih cepat? Tunjukkan loyalitasmu lewat kontribusi nyata.",
+    "Jangan cuma jadi penonton pasif. Kontribusi kamu menentukan seberapa jauh aku akan melangkah.",
+  ],
 };
 
 function getRandomOC() {

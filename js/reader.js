@@ -185,41 +185,61 @@ function createReaderSettingsModal(currentSettings, readingMode, onChange) {
     if (e.target === overlay) close();
   });
 
-  overlay.querySelector('[data-action="close"]')?.addEventListener("click", close);
+  overlay
+    .querySelector('[data-action="close"]')
+    ?.addEventListener("click", close);
 
-  overlay.querySelector('[data-action="reset"]')?.addEventListener("click", () => {
-    const def = defaultReaderSettings();
-    draft = { ...def };
-    overlay.querySelector('[data-setting="zoomPct"]').value = String(def.zoomPct);
-    overlay.querySelector('[data-label="zoomPct"]').textContent = String(def.zoomPct);
-    overlay.querySelector('[data-setting="equalize"]').checked = def.equalize;
-    overlay.querySelector('[data-setting="fit"]').value = def.fit;
-    overlay.querySelector('[data-setting="frameRatioMode"]').value = def.frameRatioMode;
-    overlay.querySelector('[data-setting="noBlurLoading"]').checked = def.noBlurLoading;
-    commit(draft);
-  });
+  overlay
+    .querySelector('[data-action="reset"]')
+    ?.addEventListener("click", () => {
+      const def = defaultReaderSettings();
+      draft = { ...def };
+      overlay.querySelector('[data-setting="zoomPct"]').value = String(
+        def.zoomPct,
+      );
+      overlay.querySelector('[data-label="zoomPct"]').textContent = String(
+        def.zoomPct,
+      );
+      overlay.querySelector('[data-setting="equalize"]').checked = def.equalize;
+      overlay.querySelector('[data-setting="fit"]').value = def.fit;
+      overlay.querySelector('[data-setting="frameRatioMode"]').value =
+        def.frameRatioMode;
+      overlay.querySelector('[data-setting="noBlurLoading"]').checked =
+        def.noBlurLoading;
+      commit(draft);
+    });
 
-  overlay.querySelector('[data-setting="readingMode"]')?.addEventListener("change", (e) => {
-    const next = String(e.target.value || "scroll") === "page" ? "page" : "scroll";
-    if (next !== readingMode) {
-      localStorage.setItem("readingMode", next);
-      window.location.reload();
-    }
-  });
+  overlay
+    .querySelector('[data-setting="readingMode"]')
+    ?.addEventListener("change", (e) => {
+      const next =
+        String(e.target.value || "scroll") === "page" ? "page" : "scroll";
+      if (next !== readingMode) {
+        localStorage.setItem("readingMode", next);
+        window.location.reload();
+      }
+    });
 
-  overlay.querySelector('[data-setting="zoomPct"]')?.addEventListener("input", (e) => {
-    const value = Number(e.target.value) || 100;
-    overlay.querySelector('[data-label="zoomPct"]').textContent = String(value);
-    commit({ ...draft, zoomPct: value });
-  });
+  overlay
+    .querySelector('[data-setting="zoomPct"]')
+    ?.addEventListener("input", (e) => {
+      const value = Number(e.target.value) || 100;
+      overlay.querySelector('[data-label="zoomPct"]').textContent =
+        String(value);
+      commit({ ...draft, zoomPct: value });
+    });
 
-  overlay.querySelector('[data-setting="equalize"]')?.addEventListener("change", (e) => {
-    commit({ ...draft, equalize: Boolean(e.target.checked) });
-  });
+  overlay
+    .querySelector('[data-setting="equalize"]')
+    ?.addEventListener("change", (e) => {
+      commit({ ...draft, equalize: Boolean(e.target.checked) });
+    });
 
-  overlay.querySelector('[data-setting="fit"]')?.addEventListener("change", (e) => {
-    commit({ ...draft, fit: String(e.target.value || "contain") });
-  });
+  overlay
+    .querySelector('[data-setting="fit"]')
+    ?.addEventListener("change", (e) => {
+      commit({ ...draft, fit: String(e.target.value || "contain") });
+    });
 
   overlay
     .querySelector('[data-setting="frameRatioMode"]')
@@ -299,7 +319,9 @@ function pickRecommendations(list, current) {
   const all = Array.isArray(list) ? list : [];
   if (!current || !current.id) return all.slice(0, 3);
 
-  const curGenres = new Set(Array.isArray(current.genres) ? current.genres : []);
+  const curGenres = new Set(
+    Array.isArray(current.genres) ? current.genres : [],
+  );
   const curSeries = current.series ? String(current.series) : "";
 
   function score(m) {
@@ -450,6 +472,19 @@ function buildImageUrl(manga, chapterNumber, pageNumber) {
   // return `${chapter.folder}p${String(pageNumber).padStart(2, "0")}.png`;
 }
 
+function randomDelay(min = 100, max = 800) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// random param biar URL beda terus
+function randomizeUrl(url) {
+  return `${url}?v=${Math.random().toString(36).slice(2)}`;
+}
+
 function renderPages(container, manga, chapterNumber, pages) {
   container.innerHTML = "";
 
@@ -460,20 +495,34 @@ function renderPages(container, manga, chapterNumber, pages) {
   const base = chapter.folder;
 
   // DETECT apakah 0.png ada
-  const testImg = new Image();
-  testImg.src = `${base}0.png`;
-
-  testImg.onload = () => {
-    // ✅ mulai dari 0
-    renderWithStart(0);
-  };
-
-  testImg.onerror = () => {
-    // ❌ mulai dari 1
-    renderWithStart(1);
-  };
+  renderWithStart(1);
 
   const formats = ["png", "jpg", "jpeg", "webp"];
+
+  // function getImageSrc(base, pageNumber) {
+  //   return new Promise((resolve) => {
+  //     let i = 0;
+
+  //     function tryNext() {
+  //       if (i >= formats.length) {
+  //         resolve("");
+  //         return;
+  //       }
+
+  //       const ext = formats[i];
+  //       const test = new Image();
+  //       test.src = `${base}${pageNumber}.${ext}`;
+
+  //       test.onload = () => resolve(test.src);
+  //       test.onerror = () => {
+  //         i++;
+  //         tryNext();
+  //       };
+  //     }
+
+  //     tryNext();
+  //   });
+  // }
 
   function getImageSrc(base, pageNumber) {
     return new Promise((resolve) => {
@@ -481,15 +530,17 @@ function renderPages(container, manga, chapterNumber, pages) {
 
       function tryNext() {
         if (i >= formats.length) {
-          resolve(""); // kalau semua gagal
+          resolve("");
           return;
         }
 
         const ext = formats[i];
-        const test = new Image();
-        test.src = `${base}${pageNumber}.${ext}`;
+        const url = `${base}${pageNumber}.${ext}`;
 
-        test.onload = () => resolve(test.src);
+        const test = new Image();
+        test.src = randomizeUrl(url); // 🔥 RANDOM URL
+
+        test.onload = () => resolve(url); // balik ke URL asli (dipakai fetch)
         test.onerror = () => {
           i++;
           tryNext();
@@ -540,15 +591,40 @@ function renderPages(container, manga, chapterNumber, pages) {
         img.classList.add("is-error");
       });
 
-      getImageSrc(base, pageNumber).then((src) => {
+      // getImageSrc(base, pageNumber).then((src) => {
+      //   if (!src) {
+      //     img.classList.remove("is-loading");
+      //     img.classList.add("is-error");
+      //     img.removeAttribute("src");
+      //     return;
+      //   }
+      //   img.src = src;
+      // });
+      (async () => {
+        const delay = randomDelay(200, 1200); // 🔥 delay random
+        await sleep(delay);
+
+        const src = await getImageSrc(base, pageNumber);
+
         if (!src) {
           img.classList.remove("is-loading");
           img.classList.add("is-error");
-          img.removeAttribute("src");
           return;
         }
-        img.src = src;
-      });
+
+        try {
+          const res = await fetch(randomizeUrl(src), {
+            cache: "no-store",
+          }); // 🔥 fetch + random param
+          const blob = await res.blob();
+
+          const blobUrl = URL.createObjectURL(blob);
+          img.src = blobUrl;
+        } catch {
+          img.classList.remove("is-loading");
+          img.classList.add("is-error");
+        }
+      })();
 
       frame.appendChild(img);
       frame.appendChild(msg);
@@ -777,7 +853,9 @@ function init() {
   let currentSettings = applyReaderSettings(initialSettings) || initialSettings;
 
   document.body.classList.remove("mode-scroll", "mode-page");
-  document.body.classList.add(readingMode === "page" ? "mode-page" : "mode-scroll");
+  document.body.classList.add(
+    readingMode === "page" ? "mode-page" : "mode-scroll",
+  );
 
   const id = getParam("id");
   const chParam = getParam("ch");
@@ -949,12 +1027,14 @@ function init() {
         .map((c) => Number(c?.number))
         .filter((n) => Number.isFinite(n))
         .sort((a, b) => a - b);
-        
+
       const currentIndex = sortedChapters.indexOf(Number(chapterNumber));
-      const prevChapterNum = currentIndex > 0 ? sortedChapters[currentIndex - 1] : null;
-      const nextChapterNum = currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : null;
-
-
+      const prevChapterNum =
+        currentIndex > 0 ? sortedChapters[currentIndex - 1] : null;
+      const nextChapterNum =
+        currentIndex < sortedChapters.length - 1
+          ? sortedChapters[currentIndex + 1]
+          : null;
 
       if (nextChapterBtn) {
         if (nextChapterNum !== null) {
@@ -991,7 +1071,11 @@ function handleControlsPosition() {
   const footerRect = footer ? footer.getBoundingClientRect() : null;
   const windowHeight = window.innerHeight;
 
-  const topTarget = stopRect ? stopRect.top : footerRect ? footerRect.top : windowHeight + 9999;
+  const topTarget = stopRect
+    ? stopRect.top
+    : footerRect
+      ? footerRect.top
+      : windowHeight + 9999;
   if (topTarget < windowHeight) {
     const overlap = windowHeight - topTarget;
     controls.style.setProperty("--reader-y-offset", `-${overlap + 16}px`);
@@ -1030,7 +1114,9 @@ function updateControlsVisibilityOnScroll() {
   lastScrollY = y;
 }
 
-window.addEventListener("scroll", updateControlsVisibilityOnScroll, { passive: true });
+window.addEventListener("scroll", updateControlsVisibilityOnScroll, {
+  passive: true,
+});
 window.addEventListener("resize", updateControlsVisibilityOnScroll);
 
 document.addEventListener("keydown", (e) => {

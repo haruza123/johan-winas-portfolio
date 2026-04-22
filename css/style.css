@@ -2969,3 +2969,164 @@ body[data-theme="light"] .ad-modal {
     transform: translateY(6px) scale(1);
   }
 }
+
+/* --------------------------------------------------------------------------
+   Security dialog (common vs rare)
+   -------------------------------------------------------------------------- */
+
+.security-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2600;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.56);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.security-modal.is-open {
+  opacity: 1;
+}
+
+.security-box {
+  width: min(420px, 92vw);
+  border-radius: 18px;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft);
+  padding: 18px 16px 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(14px) scale(0.98);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease,
+    background var(--theme-transition), color var(--theme-transition);
+}
+
+.security-modal.is-open .security-box {
+  transform: translateY(0) scale(1);
+}
+
+.security-box__name {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.security-box__rarity {
+  margin: 0 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+}
+
+.security-box__text {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.security-box__btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Common: subtle cyan */
+.security-box[data-rarity="common"] {
+  border-color: rgba(93, 224, 230, 0.2);
+}
+
+.security-box[data-rarity="common"] .security-box__name {
+  color: color-mix(in srgb, var(--accent-cyan) 66%, var(--text-primary));
+}
+
+.security-box[data-rarity="common"].is-animating {
+  animation: secCommonPop 0.35s ease;
+}
+
+@keyframes secCommonPop {
+  0% {
+    transform: translateY(14px) scale(0.98);
+  }
+  60% {
+    transform: translateY(0) scale(1.01);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Rare: gradient border + sparkle */
+.security-box[data-rarity="rare"] {
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.22), 0 26px 90px rgba(0, 0, 0, 0.55);
+}
+
+body[data-theme="light"] .security-box[data-rarity="rare"] {
+  border-color: rgba(255, 71, 87, 0.55);
+  box-shadow: 0 0 0 1px rgba(255, 71, 87, 0.24), 0 26px 90px rgba(64, 30, 22, 0.26);
+}
+
+.security-box[data-rarity="rare"] .security-box__rarity {
+  color: #111;
+  border-color: rgba(255, 215, 0, 0.35);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.95), rgba(93, 224, 230, 0.55));
+}
+
+body[data-theme="light"] .security-box[data-rarity="rare"] .security-box__rarity {
+  color: #fff;
+  border-color: rgba(255, 71, 87, 0.32);
+  background: linear-gradient(135deg, rgba(255, 71, 87, 0.92), rgba(255, 169, 77, 0.7));
+}
+
+.security-box[data-rarity="rare"] .security-box__name {
+  color: color-mix(in srgb, #ffd700 70%, var(--text-primary));
+}
+
+body[data-theme="light"] .security-box[data-rarity="rare"] .security-box__name {
+  color: color-mix(in srgb, #ff4757 70%, var(--text-primary));
+}
+
+.security-box[data-rarity="rare"]::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(420px 180px at 20% 10%, rgba(255, 215, 0, 0.18), transparent 60%),
+    radial-gradient(420px 180px at 80% 40%, rgba(93, 224, 230, 0.12), transparent 62%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.security-box[data-rarity="rare"].is-animating {
+  animation: secRarePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes secRarePop {
+  0% {
+    transform: translateY(18px) scale(0.95) rotate(-1.5deg);
+  }
+  55% {
+    transform: translateY(0) scale(1.04) rotate(1deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}

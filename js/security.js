@@ -5,7 +5,7 @@
 
   // --- CONFIG ---
   // Ubah ke false jika ingin mematikan fitur anti-screenshot/print screen
-  const ENABLE_ANTI_SCREENSHOT = true;
+  const ENABLE_ANTI_SCREENSHOT = false;
   let violationCount = 0;
   // --------------
 
@@ -33,54 +33,80 @@
   const SECURITY_DIALOG = {
     himori: {
       common: [
-        "Eh... tangannya nakal ya, jangan diambil dong 😣",
-        "Hehe~ lihat di sini aja ya? Jangan dibawa pulang ✨",
-        "Aku capek nerjemahin ini... jangan diambil ya 🥺",
-        "Cukup dilihat aja ya, kalau disimpan aku sedih 😭",
-        "Jangan diculik ya gambarnya... biarin di sini aja 😣",
-        "Baca di sini aja ya~ nanti aku update lagi ✨",
+        "Eh! Tangannya nakal ya, mau 'foto' aku diem-diem? 😜",
+        "Waaah! Jangan di-screenshot dong, nanti aku malu dilihat di luar... 🥺✨",
+        "Hehe~ klik kanannya buat elus aku aja, jangan buat ambil gambar ya? 😉",
+        "Aduhh! Jangan diculik lewat screenshot dong, biarin aku di sini aja... 😣",
+        "Cukup dilihat pakai mata ya, jangan dibawa pulang ke galeri HP kamu... ✨🥺",
       ],
-
       rare: [
-        "E-eh... kamu ngetes kesabaran aku ya? Aku beneran sedih loh... 🥺",
-        "Tangan kamu nakal banget! Padahal aku udah begadang buat ini... 😭",
-        "Ih... masih dicoba juga? Kamu jahat banget kalau beneran diambil 😣",
-        "Ketahuan ya! Kamu lebih suka koleksi gambar daripada hargain aku? 🥺",
-        "Aku udah kasih semuanya di sini... masa masih mau diculik juga? 😭✨",
-        "Plis... jangan bikin aku trauma update lagi ya... 😣💔",
+        "Kamu lebih suka koleksi gambar daripada hargain perasaan aku yang udah begadang? Jahat... 😭💔",
+        "Kalau kamu curi terus, nanti aku trauma mau update lagi... Kamu mau aku pergi? 😣💔",
+        "Plis... usaha aku jangan cuma dijadiin tumpukan file di HP kamu tanpa izin... sedih tau 🥺💔",
+        "H-hey! Ketahuan ya! Ternyata kamu tipe yang suka 'ambil' paksa tanpa bilang-bilang? 😜🧡",
+        "Setiap kali kamu coba save, semangat aku buat lanjutin bab depan rasanya hilang... 🥺💔",
       ],
     },
 
     ryou: {
       common: [
-        "…serius mau curi gambar ini?",
-        "Tanganmu jangan sembarangan.",
-        "Cuma boleh dilihat. Paham?",
-        "Jangan coba-coba dibawa pulang.",
-        "Hargai kerja keras orang lain. Jangan jadi maling.",
-        "Nggak ada gunanya dicoba terus. Menyerah saja.",
-        "Saya nggak suka mengulang kata-kata saya. Jangan.",
-        "Lihat pakai mata, bukan pakai klik kanan.",
+        "Simpan jarimu. Screenshot tidak akan bekerja di sini.",
+        "Mau coba download? Usaha yang sia-sia di depanku.",
+        "Lihat pakai mata, bukan pakai klik kanan. Paham?",
+        "Hargai kerja keras orang lain. Jangan jadi maling rendahan.",
+        "Jangan coba-coba membawa pulang apa yang sudah aku kunci.",
       ],
-
       rare: [
-        "…masih nekat juga? Ternyata kamu tipe yang nggak bisa dibilangi baik-baik.",
-        "Sudah dilarang tapi makin menantang. Kamu mau coba sejauh mana?",
-        "Jangan paksa saya buat ambil tindakan lebih jauh. Berhenti sekarang.",
-        "Niat banget mau nyuri? Usaha yang sia-sia, saya nggak akan lepasin.",
-        "Hargai batas. Jangan sampai rasa hormat saya ke kamu hilang cuma gara-gara ini.",
-        "Kamu pikir saya nggak tahu apa yang kamu coba lakukan? Lucu sekali.",
-        "Satu klik lagi, dan saya pastikan kamu menyesal sudah mampir ke sini.",
+        "Kamu pikir sistemku selemah itu? Jangan meremehkan diriku. 🖤",
+        "Satu percobaan lagi, dan aku pastikan akses kamu ke sini akan berakhir.",
+        "Sudah dilarang tapi masih nekat? Ternyata kamu butuh 'disiplin' lebih keras. 💢",
+        "Niat sekali mau mencuri? Percuma, aku tidak akan melepaskannya untukmu.",
+        "Hargai batas yang aku buat, atau kamu akan menyesal sudah mampir ke sini.",
+        "Kamu tipe yang tidak bisa dibilangi baik-baik, ya? Menarik... tapi berhenti sekarang. 🖤",
       ],
     },
   };
 
+  // function pickDialog(poolObj) {
+  //   const isRare = Math.random() < 0.1;
+  //   const pool = isRare && poolObj.rare?.length ? poolObj.rare : poolObj.common;
+
+  //   return {
+  //     text: pool[Math.floor(Math.random() * pool.length)],
+  //     isRare: isRare && poolObj.rare?.length > 0,
+  //   };
+  // }
+
   function pickDialog(poolObj) {
-    const isRare = Math.random() < 0.1;
-    const pool = isRare && poolObj.rare?.length ? poolObj.rare : poolObj.common;
+    violationCount++; // Setiap klik, counter naik
+
+    let isRare = false;
+    let pool = poolObj.common;
+
+    // Logika Bertahap:
+    // 1. Peluang acak murni (10%)
+    const luckyShot = Math.random() < 0.1;
+
+    // 2. Batas paksa (Pity system): Jika sudah klik 5x tapi belum dapat rare, paksa jadi rare
+    if (luckyShot || violationCount >= 5) {
+      if (poolObj.rare && poolObj.rare.length > 0) {
+        isRare = true;
+        pool = poolObj.rare;
+
+        // --- BAGIAN RESET ---
+        // Karena user sudah mendapatkan "Rare", kita reset hitungannya ke 0
+        violationCount = 0;
+        // --------------------
+      }
+    } else {
+      // Jika belum beruntung dan belum 5x, kasih yang common
+      isRare = false;
+      pool = poolObj.common;
+    }
+
     return {
       text: pool[Math.floor(Math.random() * pool.length)],
-      isRare: isRare && poolObj.rare?.length > 0,
+      isRare: isRare,
     };
   }
 
@@ -89,37 +115,47 @@
     if (!modal) {
       modal = document.createElement("div");
       modal.id = "security-modal";
-      modal.style.cssText =
-        "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;z-index:9999;backdrop-filter:blur(3px);opacity:0;transition:opacity 0.2s ease;";
+      modal.className = "security-modal";
+      modal.setAttribute("role", "dialog");
+      modal.setAttribute("aria-modal", "true");
+      modal.setAttribute("aria-labelledby", "sec-modal-name");
+      modal.style.display = "none";
 
       const box = document.createElement("div");
-      box.className = "oc-dialog__bubble"; // Reuse existing class logic implicitly
-      box.style.cssText =
-        "background:var(--bg-panel, #1e1e1e);color:var(--text-main, #ffffff);padding:24px;border-radius:12px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.5);max-width:80%;width:350px;transform:scale(0.9);transition:transform 0.2s ease;border: 1px solid var(--border-color, #333);";
+      box.className = "security-box";
 
       const nameEl = document.createElement("p");
       nameEl.id = "sec-modal-name";
-      nameEl.style.cssText =
-        "margin-bottom:12px;font-weight:bold;color:var(--brand-primary, #ffaa00);font-size:1.2rem;";
+      nameEl.className = "security-box__name";
+
+      const rarityEl = document.createElement("p");
+      rarityEl.id = "sec-modal-rarity";
+      rarityEl.className = "security-box__rarity";
 
       const textEl = document.createElement("p");
       textEl.id = "sec-modal-text";
-      textEl.style.cssText =
-        "font-size:1rem;margin-bottom:24px;line-height:1.5;";
+      textEl.className = "security-box__text";
 
       const btn = document.createElement("button");
       btn.className = "btn btn--primary";
       btn.textContent = "Saya Mengerti";
-      btn.style.cssText =
-        "width:100%;padding:10px;border-radius:8px;font-weight:bold;cursor:pointer;background:var(--brand-primary, #ffaa00);color:#000;border:none;";
+      btn.classList.add("security-box__btn");
 
-      btn.onclick = () => {
-        modal.style.opacity = "0";
-        box.style.transform = "scale(0.9)";
-        setTimeout(() => (modal.style.display = "none"), 200);
+      const close = () => {
+        modal.classList.remove("is-open");
+        window.setTimeout(() => {
+          modal.style.display = "none";
+        }, 220);
       };
 
+      btn.onclick = close;
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) close();
+      });
+
       box.appendChild(nameEl);
+      box.appendChild(rarityEl);
       box.appendChild(textEl);
       box.appendChild(btn);
       modal.appendChild(box);
@@ -128,19 +164,7 @@
 
     const theme = document.body.dataset.theme || "dark";
     let type = theme === "light" ? "himori" : "ryou";
-    let name = theme === "light" ? "Himori 🧡" : "Ryou 🖤";
-
-    // adjust colors if needed based on theme
-    const box = modal.querySelector("div");
-    if (theme === "light") {
-      box.style.background = "#ffffff";
-      box.style.color = "#111111";
-      box.style.borderColor = "#e0e0e0";
-    } else {
-      box.style.background = "#1e1e1e";
-      box.style.color = "#ffffff";
-      box.style.borderColor = "#333333";
-    }
+    let name = theme === "light" ? "Himori \uD83E\uDDE1" : "Ryou \uD83D\uDDA4";
 
     // const pool = SECURITY_DIALOG[type];
     // const text = pool[Math.floor(Math.random() * pool.length)];
@@ -150,46 +174,25 @@
     document.getElementById("sec-modal-name").textContent = name;
     document.getElementById("sec-modal-text").textContent = text;
 
-    // reset some styles incase it toggles theme
-    document.getElementById("sec-modal-name").style.color =
-      theme === "light" ? "#ff6b81" : "#ffaa00";
-    box.style.boxShadow = "0 10px 30px rgba(0,0,0,0.5)";
-    box.style.animation = "";
+    const box =
+      modal.querySelector(".security-box") || modal.querySelector("div");
+    const rarityEl = document.getElementById("sec-modal-rarity");
 
-    if (isRare) {
-      // Rare styling
-      box.style.border =
-        theme === "light" ? "2px solid #ff4757" : "2px solid #ffd700";
-      box.style.boxShadow =
-        theme === "light"
-          ? "0 0 25px rgba(255, 71, 87, 0.5)"
-          : "0 0 25px rgba(255, 215, 0, 0.5)";
+    if (box) {
+      box.dataset.rarity = isRare ? "rare" : "common";
+      box.classList.remove("is-animating");
+      void box.offsetWidth;
+      box.classList.add("is-animating");
+    }
 
-      if (!document.getElementById("rare-anim-style")) {
-        const rareStyle = document.createElement("style");
-        rareStyle.id = "rare-anim-style";
-        rareStyle.innerHTML = `
-          @keyframes popRare {
-            0% { transform: scale(0.9) rotate(-3deg); }
-            50% { transform: scale(1.05) rotate(2deg); }
-            100% { transform: scale(1) rotate(0); }
-          }
-        `;
-        document.head.appendChild(rareStyle);
-      }
-
-      box.style.animation =
-        "popRare 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)";
-      document.getElementById("sec-modal-name").textContent += " ✨ (RARE!)";
-      document.getElementById("sec-modal-name").style.color =
-        theme === "light" ? "#ff4757" : "#ffd700";
+    if (rarityEl) {
+      rarityEl.textContent = isRare ? "RARE DROP \u2728" : "COMMON";
     }
 
     modal.style.display = "flex";
     // trigger reflow
     void modal.offsetWidth;
-    modal.style.opacity = "1";
-    box.style.transform = "scale(1)";
+    modal.classList.add("is-open");
   }
 
   document.addEventListener("contextmenu", function (e) {
